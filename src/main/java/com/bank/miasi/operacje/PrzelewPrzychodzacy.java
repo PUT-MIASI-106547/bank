@@ -26,5 +26,4 @@ public class PrzelewPrzychodzacy implements TypOperacji {
     public TypOperacji getReverse() {
         return new PrzelewWychodzacy();
     }
-
 }

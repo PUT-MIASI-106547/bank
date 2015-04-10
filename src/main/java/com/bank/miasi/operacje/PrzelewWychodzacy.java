@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  *
  * @author Krzysztof
  */
-public class PrzelewWychodzacy implements TypOperacji{
+public class PrzelewWychodzacy implements TypOperacji {
 
     @Override
     public String getName() {
@@ -17,8 +17,8 @@ public class PrzelewWychodzacy implements TypOperacji{
     public BigDecimal getKwota(BigDecimal kwota) {
         return kwota.negate();
     }
-        public TypOperacji getReverse() {
+
+    public TypOperacji getReverse() {
         return new PrzelewPrzychodzacy();
     }
-
 }

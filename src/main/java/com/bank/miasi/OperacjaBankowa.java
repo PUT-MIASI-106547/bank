@@ -5,6 +5,7 @@ import com.bank.miasi.konta.Konto;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.kir.ManagerKIR;
 import com.bank.miasi.kir.Przesylka;
+import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,15 +23,14 @@ public class OperacjaBankowa {
     private Date data;
 
     private OperacjaBankowa() {
-
     }
 
     public static void wykonajOperacje(ManagerKIR managerKIR, BigDecimal kwota,
             TypOperacji typOperacji, String tytul, Konto doKogo, Konto odKogo) throws NiewspieranaOperacja {
         OperacjaBankowa operacjaBankowa = new OperacjaBankowa(typOperacji, kwota, tytul, odKogo, doKogo, new Date());
-        doKogo.wplata(operacjaBankowa);
+        doKogo.wplata(operacjaBankowa.reverse());
         if (odKogo != null) {
-            odKogo.wplata(operacjaBankowa.reverse());
+            odKogo.wplata(operacjaBankowa);
         }
         if (doKogo.getBankId() != managerKIR.getBankId()) {
             managerKIR.dodajPaczkeDoWyslania(doKogo.getBankId(), Przesylka.getPrzesylkaFromOperacje(operacjaBankowa));
@@ -74,4 +74,7 @@ public class OperacjaBankowa {
         return new OperacjaBankowa(typOperacji.getReverse(), kwota, tytul, odKogo, doKogo, data);
     }
 
+    public void addRowToRaport(Raport visitator) {
+        visitator.addRow(this);
+    }
 }

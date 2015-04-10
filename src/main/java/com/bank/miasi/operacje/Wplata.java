@@ -24,7 +24,6 @@ public class Wplata implements TypOperacji {
     }
 
     public TypOperacji getReverse() {
-        return null;
+        return this;
     }
-
 }

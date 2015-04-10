@@ -6,6 +6,7 @@ import com.bank.miasi.exceptions.BlednaKwota;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.service.visitator.AllRaport;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;

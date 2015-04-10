@@ -105,4 +105,9 @@ public class Klient {
         return decyzja > 0;
 
     }
+
+    @Override
+    public String toString() {
+        return imie + " " + nazwisko;
+    }
 }

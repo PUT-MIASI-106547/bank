@@ -4,6 +4,8 @@ import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.service.visitator.AllRaport;
+import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,9 +58,21 @@ public abstract class Konto {
     public void addHistoriaOperacji(OperacjaBankowa operacjaBankowa) {
         historia.add(operacjaBankowa);
     }
-    
-    public int getBankId(){
-        return Integer.parseInt(numer.substring(0,1));
+
+    public int getBankId() {
+        return Integer.parseInt(numer.substring(0, 1));
     }
 
+    public void printRaport(Raport raport) {
+        for (OperacjaBankowa operacjaBankowa : historia) {
+            operacjaBankowa.addRowToRaport(raport);
+        }
+        raport.addHeader(this);
+        raport.print();
+    }
+
+    @Override
+    public String toString() {
+        return wlasciciel.toString();
+    }
 }
