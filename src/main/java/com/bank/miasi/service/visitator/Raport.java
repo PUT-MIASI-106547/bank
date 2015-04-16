@@ -1,7 +1,7 @@
 package com.bank.miasi.service.visitator;
 
 import com.bank.miasi.OperacjaBankowa;
-import com.bank.miasi.konta.Konto;
+import com.bank.miasi.konta.Kontable;
 
 /**
  *
@@ -11,7 +11,7 @@ public interface Raport {
 
     public void addRow(OperacjaBankowa aThis);
 
-    public void addHeader(Konto konto);
+    public void addHeader(Kontable konto);
 
     public void print();
 }

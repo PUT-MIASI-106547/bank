@@ -1,7 +1,7 @@
 package com.bank.miasi.service.visitator;
 
 import com.bank.miasi.OperacjaBankowa;
-import com.bank.miasi.konta.Konto;
+import com.bank.miasi.konta.Kontable;
 import com.bank.miasi.operacje.TypOperacji;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
 public class TypeRaport implements Raport {
 
     private List<Row> rows = new ArrayList<>();
-    private Konto konto;
+    private Kontable konto;
     private TypOperacji typOperacji;
 
     public TypeRaport(TypOperacji typOperacji) {
@@ -30,7 +30,7 @@ public class TypeRaport implements Raport {
         }
     }
 
-    public void addHeader(Konto konto) {
+    public void addHeader(Kontable konto) {
         this.konto = konto;
     }
 
@@ -80,11 +80,11 @@ public class TypeRaport implements Raport {
             return operacja.getData();
         }
 
-        Konto getOdKogo() {
+        Kontable getOdKogo() {
             return operacja.getOdKogo();
         }
 
-        Konto getDoKogo() {
+        Kontable getDoKogo() {
             return operacja.getDoKogo();
         }
 

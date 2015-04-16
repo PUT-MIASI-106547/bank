@@ -1,10 +1,10 @@
 package com.bank.miasi;
 
 import com.bank.miasi.operacje.TypOperacji;
-import com.bank.miasi.konta.Konto;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.kir.ManagerKIR;
 import com.bank.miasi.kir.Przesylka;
+import com.bank.miasi.konta.Kontable;
 import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,15 +18,15 @@ public class OperacjaBankowa {
     private TypOperacji typOperacji;
     private BigDecimal kwota;
     private String tytul;
-    private Konto odKogo;
-    private Konto doKogo;
+    private Kontable odKogo;
+    private Kontable doKogo;
     private Date data;
 
     private OperacjaBankowa() {
     }
 
     public static void wykonajOperacje(ManagerKIR managerKIR, BigDecimal kwota,
-            TypOperacji typOperacji, String tytul, Konto doKogo, Konto odKogo) throws NiewspieranaOperacja {
+            TypOperacji typOperacji, String tytul, Kontable doKogo, Kontable odKogo) throws NiewspieranaOperacja {
         OperacjaBankowa operacjaBankowa = new OperacjaBankowa(typOperacji, kwota, tytul, odKogo, doKogo, new Date());
         doKogo.wplata(operacjaBankowa.reverse());
         if (odKogo != null) {
@@ -49,11 +49,11 @@ public class OperacjaBankowa {
         return tytul;
     }
 
-    public Konto getOdKogo() {
+    public Kontable getOdKogo() {
         return odKogo;
     }
 
-    public Konto getDoKogo() {
+    public Kontable getDoKogo() {
         return doKogo;
     }
 
@@ -61,7 +61,7 @@ public class OperacjaBankowa {
         return data;
     }
 
-    private OperacjaBankowa(TypOperacji typOperacji, BigDecimal kwota, String tytul, Konto odKogo, Konto doKogo, Date data) {
+    private OperacjaBankowa(TypOperacji typOperacji, BigDecimal kwota, String tytul, Kontable odKogo, Kontable doKogo, Date data) {
         this.typOperacji = typOperacji;
         this.kwota = kwota;
         this.tytul = tytul;

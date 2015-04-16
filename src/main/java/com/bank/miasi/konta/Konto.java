@@ -3,8 +3,6 @@ package com.bank.miasi.konta;
 import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.konta.typy.TypKonta;
-import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.service.visitator.AllRaport;
 import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,13 +14,18 @@ import java.util.List;
  *
  * @author Krzysztof
  */
-public abstract class Konto {
+public abstract class Konto implements Kontable {
 
     protected BigDecimal stan = BigDecimal.ZERO;
     protected TypKonta typ;
     protected List<OperacjaBankowa> historia = new ArrayList<>();
     private String numer;
     private Klient wlasciciel;
+    private BigDecimal initialAmount = BigDecimal.ZERO;
+
+    public void setInitialAmount(BigDecimal initialAmount) {
+        this.initialAmount = initialAmount;
+    }
 
     private Konto() {
     }
@@ -33,36 +36,42 @@ public abstract class Konto {
         this.wlasciciel = wlasciciel;
     }
 
+    @Override
     public BigDecimal getStan() {
-        return stan;
+        return stan.add(initialAmount);
     }
 
+    @Override
     public TypKonta getTyp() {
         return typ;
     }
 
+    @Override
     public List<OperacjaBankowa> getHistoria(Date odKiedy, Date doKiedy) {
         return Collections.unmodifiableList(historia);
     }
 
+    @Override
     public String getNumer() {
         return numer;
     }
 
+    @Override
     public Klient getWlasciciel() {
         return wlasciciel;
     }
 
-    public abstract void wplata(OperacjaBankowa operacjaBankowa) throws NiewspieranaOperacja;
-
+    @Override
     public void addHistoriaOperacji(OperacjaBankowa operacjaBankowa) {
         historia.add(operacjaBankowa);
     }
 
+    @Override
     public int getBankId() {
         return Integer.parseInt(numer.substring(0, 1));
     }
 
+    @Override
     public void printRaport(Raport raport) {
         for (OperacjaBankowa operacjaBankowa : historia) {
             operacjaBankowa.addRowToRaport(raport);
@@ -75,4 +84,9 @@ public abstract class Konto {
     public String toString() {
         return wlasciciel.toString();
     }
+
+    protected boolean validAmount(BigDecimal ile) {
+        return stan.add(initialAmount).add(ile).signum() < 0;
+    }
+
 }

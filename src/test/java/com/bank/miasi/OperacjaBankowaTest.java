@@ -8,7 +8,7 @@ package com.bank.miasi;
 import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.kir.ManagerKIR;
-import com.bank.miasi.konta.Konto;
+import com.bank.miasi.konta.Kontable;
 import com.bank.miasi.konta.KontoBankowe;
 import com.bank.miasi.konta.typy.KontoWygodne;
 import com.bank.miasi.operacje.PrzelewWychodzacy;
@@ -34,8 +34,8 @@ public class OperacjaBankowaTest {
 
     Klient klient1;
     Klient klient2;
-    KontoBankowe kontoKlient1;
-    KontoBankowe kontoKlient2;
+    Kontable kontoKlient1;
+    Kontable kontoKlient2;
     ManagerKIR managerKIR;
 
     public OperacjaBankowaTest() {
@@ -83,7 +83,7 @@ public class OperacjaBankowaTest {
 
     }
 
-    private List<OperacjaBankowa> getHistoria(Konto kontoKlient) {
+    private List<OperacjaBankowa> getHistoria(Kontable kontoKlient) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         Date dateOd = calendar.getTime();
@@ -109,7 +109,7 @@ public class OperacjaBankowaTest {
 
     }
 
-    private void InicjujWartosc(double ile, Konto konto) throws NiewspieranaOperacja {
+    private void InicjujWartosc(double ile, Kontable konto) throws NiewspieranaOperacja {
         OperacjaBankowa.wykonajOperacje(managerKIR, new BigDecimal(ile), new Wplata(), "wplata Poczatkowa", konto, null);
     }
 

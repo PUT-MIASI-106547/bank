@@ -6,20 +6,13 @@ import com.bank.miasi.exceptions.BlednaKwota;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.service.visitator.AllRaport;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 /**
  *
  * @author Krzysztof
  */
 public class KontoBankowe extends Konto {
-
-    private BigDecimal debet = BigDecimal.ZERO;
 
     public KontoBankowe(TypKonta typ, String numer, Klient wlasciciel) {
         super(typ, numer, wlasciciel);
@@ -31,7 +24,7 @@ public class KontoBankowe extends Konto {
         if (ile.signum() == 0) {
             throw new BlednaKwota();
         }
-        if (debet.add(stan.add(ile)).signum() < 0) {
+        if (validAmount(ile)) {
             throw new NieWystarczajacoSrodkow();
         }
         stan = stan.add(ile);
