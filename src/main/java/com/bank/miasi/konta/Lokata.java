@@ -6,6 +6,7 @@ import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.BlednaKwota;
 import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.kir.Bank;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -14,15 +15,16 @@ import java.util.List;
  *
  * @author Krzysztof
  */
-public class Lokata extends Konto{
+public class Lokata extends Konto {
 
-    public Lokata(TypKonta typ, String numer, Klient wlasciciel, BigDecimal kwota){
-        super(typ, numer, wlasciciel);
+    public Lokata(Bank bank, TypKonta typ, String numer, Klient wlasciciel, BigDecimal kwota) {
+        super(bank, typ, numer, wlasciciel);
         stan = kwota;
     }
+
     @Override
     public void wplata(OperacjaBankowa operacjaBankowa) throws NiewspieranaOperacja {
-            throw new NiewspieranaOperacja();
+        throw new NiewspieranaOperacja();
     }
 
 }

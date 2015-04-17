@@ -52,16 +52,16 @@ public class SymulatorZewnetrznegoKIR implements KIR {
             throw new UnauthorizedException();
         }
         for (Paczka paczka : wyslanePaczki) {
-             List<Paczka> lista = listaPaczek.get(paczka.getIdBankuOdbiorcy());
+             List<Paczka> lista = listaPaczek.get(paczka.getBankOdbiorcy().getBankId());
 
             if(lista == null) {
             lista = new ArrayList<Paczka>();
             lista.add(paczka);
-            listaPaczek.put(paczka.getIdBankuOdbiorcy(), lista);
+            listaPaczek.put(paczka.getBankOdbiorcy().getBankId(), lista);
             } else 
             {
                 lista.add(paczka);
-                listaPaczek.put(paczka.getIdBankuOdbiorcy(), lista);
+                listaPaczek.put(paczka.getBankOdbiorcy().getBankId(), lista);
             }
         }
     }

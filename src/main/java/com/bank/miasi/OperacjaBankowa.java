@@ -2,7 +2,7 @@ package com.bank.miasi;
 
 import com.bank.miasi.operacje.TypOperacji;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.kir.ManagerKIR;
+import com.bank.miasi.kir.Bank;
 import com.bank.miasi.kir.Przesylka;
 import com.bank.miasi.konta.Kontable;
 import com.bank.miasi.service.visitator.Raport;
@@ -25,15 +25,19 @@ public class OperacjaBankowa {
     private OperacjaBankowa() {
     }
 
-    public static void wykonajOperacje(ManagerKIR managerKIR, BigDecimal kwota,
+    public static void wykonajOperacje(BigDecimal kwota,
             TypOperacji typOperacji, String tytul, Kontable doKogo, Kontable odKogo) throws NiewspieranaOperacja {
         OperacjaBankowa operacjaBankowa = new OperacjaBankowa(typOperacji, kwota, tytul, odKogo, doKogo, new Date());
-        doKogo.wplata(operacjaBankowa.reverse());
+        if (doKogo != null) {
+            doKogo.wplata(operacjaBankowa.reverse());
+        }
         if (odKogo != null) {
             odKogo.wplata(operacjaBankowa);
         }
-        if (doKogo.getBankId() != managerKIR.getBankId()) {
-            managerKIR.dodajPaczkeDoWyslania(doKogo.getBankId(), Przesylka.getPrzesylkaFromOperacje(operacjaBankowa));
+        if (doKogo != null && odKogo != null) {
+            if (odKogo.getBank().getBankId() != doKogo.getBank().getBankId()) {
+                odKogo.getBank().dodajPaczkeDoWyslania(doKogo.getBank(), Przesylka.getPrzesylkaFromOperacje(operacjaBankowa));
+            }
         }
     }
 

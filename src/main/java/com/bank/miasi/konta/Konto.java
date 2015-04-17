@@ -2,6 +2,7 @@ package com.bank.miasi.konta;
 
 import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
+import com.bank.miasi.kir.Bank;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public abstract class Konto implements Kontable {
 
     protected BigDecimal stan = BigDecimal.ZERO;
     protected TypKonta typ;
+    protected Bank bank;
     protected List<OperacjaBankowa> historia = new ArrayList<>();
     private String numer;
     private Klient wlasciciel;
@@ -30,7 +32,8 @@ public abstract class Konto implements Kontable {
     private Konto() {
     }
 
-    public Konto(TypKonta typ, String numer, Klient wlasciciel) {
+    public Konto(Bank bank, TypKonta typ, String numer, Klient wlasciciel) {
+        this.bank = bank;
         this.typ = typ;
         this.numer = numer;
         this.wlasciciel = wlasciciel;
@@ -67,8 +70,8 @@ public abstract class Konto implements Kontable {
     }
 
     @Override
-    public int getBankId() {
-        return Integer.parseInt(numer.substring(0, 1));
+    public Bank getBank() {
+        return bank;
     }
 
     @Override

@@ -1,17 +1,21 @@
 package com.bank.miasi.kir;
 
+import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ManagerKIR {
+public class Bank {
+
+    private static Bank instance;
 
     private List<Paczka> listaPaczekDoWyslania;
     private int idBanku;
     private final KIR kir;
     private final String haslo;
 
-    public ManagerKIR(KIR kir, int idBanku, String haslo) {
+
+    public Bank(KIR kir, int idBanku, String haslo) {
         this.kir = kir;
         this.idBanku = idBanku;
         this.haslo = haslo;
@@ -35,11 +39,11 @@ public class ManagerKIR {
         // wykorzystywac bedzie this.listaPaczekOdebranych
     }
 
-    public void dodajPaczkeDoWyslania(int idBankuDocelowego, Przesylka przesylka) {
-        if (null ==listaPaczekDoWyslania){
+    public void dodajPaczkeDoWyslania(Bank bankDocelowy, Przesylka przesylka) {
+        if (null == listaPaczekDoWyslania) {
             listaPaczekDoWyslania = new ArrayList<>();
         }
-        this.listaPaczekDoWyslania.add(new Paczka(idBanku, idBankuDocelowego, przesylka));
+        this.listaPaczekDoWyslania.add(new Paczka(this, bankDocelowy, przesylka));
     }
 
     public int getBankId() {

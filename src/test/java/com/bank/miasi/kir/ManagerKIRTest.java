@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.lang.reflect.*;
-import com.bank.miasi.kir.ManagerKIR;
+import com.bank.miasi.kir.Bank;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,7 +24,8 @@ import java.util.List;
 public class ManagerKIRTest {
 
     private SymulatorZewnetrznegoKIR symulator;
-    private ManagerKIR manager;
+    private Bank bank;
+    private Bank bankDocelowy;
 
     public ManagerKIRTest() {
     }
@@ -42,7 +43,8 @@ public class ManagerKIRTest {
 
         symulator = new SymulatorZewnetrznegoKIR();
         symulator.zasymuluj(symulator, 100);
-        manager = new ManagerKIR(symulator, 4, "test");
+        bank = new Bank(symulator, 5, "www");
+        bankDocelowy = new Bank(symulator, 6, "ttt");
     }
 
     @After
@@ -57,12 +59,12 @@ public class ManagerKIRTest {
 
         System.out.println("pobierzPaczki");
 
-        manager.pobierzPaczki();
+        bank.pobierzPaczki();
 
-        Field field = manager.getClass().getDeclaredField("listaPaczekDoWyslania");
+        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
         field.setAccessible(true);
 
-        List<Paczka> lista = (List<Paczka>) field.get(manager);
+        List<Paczka> lista = (List<Paczka>) field.get(bank);
 
         assertEquals(100, lista.size());
     }
@@ -73,13 +75,13 @@ public class ManagerKIRTest {
     @Test
     public void testWyslijPaczki() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 
-        manager.pobierzPaczki();
-        manager.wyslijPaczki();
+        bank.pobierzPaczki();
+        bank.wyslijPaczki();
 
-        Field field = manager.getClass().getDeclaredField("listaPaczekDoWyslania");
+        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
         field.setAccessible(true);
 
-        List<Paczka> lista = (List<Paczka>) field.get(manager);
+        List<Paczka> lista = (List<Paczka>) field.get(bank);
 
         assertNull(lista);
     }
@@ -105,14 +107,13 @@ public class ManagerKIRTest {
     public void testDodajPaczkeDoWyslaniaTestPrzesylki() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 
         Przesylka przesylka = new Przesylka(new BigDecimal("1000"), "test", "123", "321");
-        int idBankuDocelowego = 5;
 
-        manager.dodajPaczkeDoWyslania(idBankuDocelowego, przesylka);
+        bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);
 
-        Field field = manager.getClass().getDeclaredField("listaPaczekDoWyslania");
+        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
         field.setAccessible(true);
 
-        List<Paczka> lista = (List<Paczka>) field.get(manager);
+        List<Paczka> lista = (List<Paczka>) field.get(bank);
 
         // TODO review the generated test code and remove the default call to fail.
         int lastIndex = (lista.size() - 1);
@@ -132,12 +133,12 @@ public class ManagerKIRTest {
         Przesylka przesylka = new Przesylka(new BigDecimal("1000"), "test", "123", "321");
         int idBankuDocelowego = 5;
 
-        manager.dodajPaczkeDoWyslania(idBankuDocelowego, przesylka);
+        bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);
 
-        Field field = manager.getClass().getDeclaredField("listaPaczekDoWyslania");
+        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
         field.setAccessible(true);
 
-        List<Paczka> lista = (List<Paczka>) field.get(manager);
+        List<Paczka> lista = (List<Paczka>) field.get(bank);
 
         // TODO review the generated test code and remove the default call to fail.
         int lastIndex = (lista.size() - 1);

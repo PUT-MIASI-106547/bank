@@ -3,6 +3,7 @@ package com.bank.miasi.konta;
 import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.kir.Bank;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
@@ -29,7 +30,7 @@ public interface Kontable {
 
     public void addHistoriaOperacji(OperacjaBankowa operacjaBankowa);
 
-    public int getBankId();
+    public Bank getBank();
 
     public void printRaport(Raport raport);
 

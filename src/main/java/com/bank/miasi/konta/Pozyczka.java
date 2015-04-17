@@ -6,6 +6,7 @@ import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.BlednaKwota;
 import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.kir.Bank;
 import java.math.BigDecimal;
 
 /**
@@ -14,8 +15,8 @@ import java.math.BigDecimal;
  */
 public class Pozyczka extends Konto {
 
-    public Pozyczka(TypKonta typ, String numer, Klient wlasciciel, BigDecimal kwota) {
-        super(typ, numer, wlasciciel);
+    public Pozyczka(Bank bank, TypKonta typ, String numer, Klient wlasciciel, BigDecimal kwota) {
+        super(bank, typ, numer, wlasciciel);
         stan = kwota;
     }
 

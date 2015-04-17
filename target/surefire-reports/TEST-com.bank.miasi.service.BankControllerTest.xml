@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="1" name="com.bank.miasi.OperacjaBankowaTest" time="0.034" errors="0" skipped="0">
+<testsuite tests="1" failures="1" name="com.bank.miasi.service.BankControllerTest" time="0.021" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_31\jre\bin"/>
@@ -62,13 +62,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.bank.miasi.OperacjaBankowaTest" name="testWykonajOperacje" time="0">
-    <failure message="expected:&lt;899.9&gt; but was:&lt;1100.1&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;899.9&gt; but was:&lt;1100.1&gt;
+  <testcase classname="com.bank.miasi.service.BankControllerTest" name="testMain" time="0.006">
+    <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:93)
-	at org.junit.Assert.failNotEquals(Assert.java:647)
-	at org.junit.Assert.assertEquals(Assert.java:443)
-	at org.junit.Assert.assertEquals(Assert.java:512)
-	at com.bank.miasi.OperacjaBankowaTest.testWykonajOperacje(OperacjaBankowaTest.java:77)
+	at com.bank.miasi.service.BankControllerTest.testMain(BankControllerTest.java:49)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -103,8 +100,45 @@
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </failure>
-    <system-out>wykonajOperacje
+    <system-out>main
+Raport dla konta 1111
+Właściciel:krzychu Pawlak
+
+Pozycje:
+Data			Od Kogo		DoKogo		Kwota
+2015-04-17 10:00:44	Nieznany	krzychu Pawlak	12000.1
+2015-04-17 10:00:44	krzychu Pawlak	Jakub Pawlak	-500.0
+2015-04-17 10:00:44	krzychu Pawlak	Jakub Pawlak	-1200.0
+2015-04-17 10:00:44	krzychu Pawlak	com.bank.miasi.konta.KontoBankoweZDebetem@42d3bd8b	-7000.0
+2015-04-17 10:00:44	krzychu Pawlak	Jakub Pawlak	-2000.0
+2015-04-17 10:00:44	Jakub Pawlak	krzychu Pawlak	10.0
+
+Raport dla konta 1111
+Właściciel:krzychu Pawlak
+
+Pozycje:
+Data			Kwota
+2015-04-17 10:00:44	12000.1
+2015-04-17 10:00:44	-500.0
+2015-04-17 10:00:44	-1200.0
+2015-04-17 10:00:44	-7000.0
+2015-04-17 10:00:44	-2000.0
+2015-04-17 10:00:44	10.0
+
+Raport dla konta 1111
+Właściciel:krzychu Pawlak
+Typ:Przelew zewnetrzny
+
+Pozycje:
+Data			Od Kogo		Do Kogo		Kwota
+2015-04-17 10:00:44	Jakub Pawlak	krzychu Pawlak	10.0
+
+Stany końcowe:
+konto1: 1310.1
+konto2: 2370.0
+konto3: 10200.0
+konto4: -1880.0
+Razem: 12000.1
 </system-out>
   </testcase>
-  <testcase classname="com.bank.miasi.OperacjaBankowaTest" name="testWykonajOperacjeBezSrodkow" time="0"/>
 </testsuite>

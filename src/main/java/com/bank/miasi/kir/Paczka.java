@@ -4,29 +4,29 @@ import java.math.BigDecimal;
 
 public class Paczka {
 
-    private final int idBankuOdbiorcy;
-    private final int idBankuNadawcy;
+    private final Bank bankOdbiorcy;
+    private final Bank bankNadawcy;
     private final Przesylka przesylka;
 
-    public Paczka(int idBankuNadawcy, int idBankuOdbiorcy, Przesylka przesylka) {
-        this.idBankuOdbiorcy = idBankuOdbiorcy;
-        this.idBankuNadawcy = idBankuNadawcy;
+    public Paczka(Bank bankNadawcy, Bank bankOdbiorcy, Przesylka przesylka) {
+        this.bankOdbiorcy = bankOdbiorcy;
+        this.bankNadawcy = bankNadawcy;
         this.przesylka = przesylka;
     }
 
-    public Paczka(int idBankuNadawcy, int idBankuOdbiorcy, BigDecimal kwota, String nazwa,
+    public Paczka(Bank bankNadawcy, Bank bankOdbiorcy, BigDecimal kwota, String nazwa,
             String tytul, String numerKontaOdbiorcy, String numerKontaNadawcy) {
-        this.idBankuOdbiorcy = idBankuOdbiorcy;
-        this.idBankuNadawcy = idBankuNadawcy;
+        this.bankOdbiorcy = bankOdbiorcy;
+        this.bankNadawcy = bankNadawcy;
         przesylka = new Przesylka(kwota, tytul, numerKontaOdbiorcy, numerKontaNadawcy);
     }
 
-    public int getIdBankuOdbiorcy() {
-        return idBankuOdbiorcy;
+    public Bank getBankOdbiorcy() {
+        return bankOdbiorcy;
     }
 
-    public int getIdBankuNadawcy() {
-        return idBankuNadawcy;
+    public Bank getBankNadawcy() {
+        return bankNadawcy;
     }
 
     public Przesylka getPrzesylka() {

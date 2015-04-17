@@ -4,6 +4,7 @@ import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.kir.Bank;
 import com.bank.miasi.service.visitator.Raport;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -61,8 +62,8 @@ public class KontoBankoweZDebetem implements Kontable {
     }
 
     @Override
-    public int getBankId() {
-        return konto.getBankId();
+    public Bank getBank() {
+        return konto.getBank();
     }
 
     @Override

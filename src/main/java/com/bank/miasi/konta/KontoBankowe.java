@@ -6,6 +6,7 @@ import com.bank.miasi.exceptions.BlednaKwota;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.konta.typy.TypKonta;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.kir.Bank;
 import java.math.BigDecimal;
 
 /**
@@ -14,8 +15,8 @@ import java.math.BigDecimal;
  */
 public class KontoBankowe extends Konto {
 
-    public KontoBankowe(TypKonta typ, String numer, Klient wlasciciel) {
-        super(typ, numer, wlasciciel);
+    public KontoBankowe(Bank bank, TypKonta typ, String numer, Klient wlasciciel) {
+        super(bank, typ, numer, wlasciciel);
     }
 
     @Override
