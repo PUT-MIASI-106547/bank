@@ -27,4 +27,9 @@ public class PrzelewPrzychodzacy implements TypOperacji {
         return false;
     }
 
+    @Override
+    public boolean isSecure() {
+        return false;
+    }
+
 }

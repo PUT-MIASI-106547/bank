@@ -14,4 +14,6 @@ public interface TypOperacji {
     public TypOperacji getReverse();
 
     public boolean isZewnetrzny();
+
+    public boolean isSecure();
 }

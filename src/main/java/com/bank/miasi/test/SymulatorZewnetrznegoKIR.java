@@ -45,7 +45,7 @@ public class SymulatorZewnetrznegoKIR implements KIR {
         }
         List<Paczka> lista = listaPaczek.get(idBanku);
         listaPaczek.remove(idBanku);
-        if (lista==null){
+        if (lista == null) {
             return new ArrayList<>();
         }
         return lista;
@@ -57,28 +57,17 @@ public class SymulatorZewnetrznegoKIR implements KIR {
             throw new UnauthorizedException();
         }
         for (Paczka paczka : wyslanePaczki) {
-             List<Paczka> lista = listaPaczek.get(paczka.getBankOdbiorcy().getBankId());
+            List<Paczka> lista = listaPaczek.get(paczka.getBankOdbiorcy().getBankId());
 
-            if(lista == null) {
-            lista = new ArrayList<Paczka>();
-            lista.add(paczka);
-            listaPaczek.put(paczka.getBankOdbiorcy().getBankId(), lista);
-            } else 
-            {
+            if (lista == null) {
+                lista = new ArrayList<Paczka>();
+                lista.add(paczka);
+                listaPaczek.put(paczka.getBankOdbiorcy().getBankId(), lista);
+            } else {
                 lista.add(paczka);
                 listaPaczek.put(paczka.getBankOdbiorcy().getBankId(), lista);
             }
         }
     }
-    
-    public void zasymuluj(KIR kir, int iloscPaczek) {
-        List<Paczka> lista = new ArrayList<>();
-        for (int i = 0; i < iloscPaczek; i++) {
-    
-            lista.add(SymulacjaPaczki.zasymulujStanPaczki());
-        }
-        
-        listaPaczek.put(4, lista);
-    }
-    
+
 }

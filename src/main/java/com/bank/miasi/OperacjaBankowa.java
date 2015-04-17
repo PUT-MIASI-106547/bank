@@ -1,5 +1,6 @@
 package com.bank.miasi;
 
+import com.bank.miasi.chain.ValidatorFactory;
 import com.bank.miasi.operacje.TypOperacji;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.kir.Bank;
@@ -22,12 +23,19 @@ public class OperacjaBankowa {
     private Kontable doKogo;
     private Date data;
 
-    private OperacjaBankowa() {
+    protected OperacjaBankowa(TypOperacji typOperacji, BigDecimal kwota, String tytul, Kontable odKogo, Kontable doKogo, Date data) {
+        this.typOperacji = typOperacji;
+        this.kwota = kwota;
+        this.tytul = tytul;
+        this.odKogo = odKogo;
+        this.doKogo = doKogo;
+        this.data = data;
     }
 
     public static void wykonajOperacje(BigDecimal kwota,
             TypOperacji typOperacji, String tytul, Kontable doKogo, Kontable odKogo) throws NiewspieranaOperacja {
         OperacjaBankowa operacjaBankowa = new OperacjaBankowa(typOperacji, kwota, tytul, odKogo, doKogo, new Date());
+        ValidatorFactory.getValidator().checkValidity(operacjaBankowa);
         if (doKogo != null && odKogo != null) {
             if (odKogo.getBank().getBankId() != doKogo.getBank().getBankId()) {
                 if (!typOperacji.isZewnetrzny()) {
@@ -72,15 +80,6 @@ public class OperacjaBankowa {
 
     public Date getData() {
         return data;
-    }
-
-    private OperacjaBankowa(TypOperacji typOperacji, BigDecimal kwota, String tytul, Kontable odKogo, Kontable doKogo, Date data) {
-        this.typOperacji = typOperacji;
-        this.kwota = kwota;
-        this.tytul = tytul;
-        this.odKogo = odKogo;
-        this.doKogo = doKogo;
-        this.data = data;
     }
 
     private OperacjaBankowa reverse() {

@@ -5,6 +5,7 @@
  */
 package com.bank.miasi.kir;
 
+import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,7 +15,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.lang.reflect.*;
 import com.bank.miasi.kir.Bank;
+import com.bank.miasi.service.Banki;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,11 +44,10 @@ public class ManagerKIRTest {
     @Before
     public void setUp() {
 
-        symulator = new SymulatorZewnetrznegoKIR();
-        symulator.zasymuluj(symulator, 100);
-        bank = new Bank(symulator, 5, "www");
-        bankDocelowy = new Bank(symulator, 6, "ttt");
+        bank = new Bank(5, "www");
+        bankDocelowy = new Bank(6, "ttt");
     }
+
 
     @After
     public void tearDown() {
@@ -105,7 +107,6 @@ public class ManagerKIRTest {
      */
     @Test
     public void testDodajPaczkeDoWyslaniaTestPrzesylki() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-
         Przesylka przesylka = new Przesylka(new BigDecimal("1000"), "test", "123", "321");
 
         bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);

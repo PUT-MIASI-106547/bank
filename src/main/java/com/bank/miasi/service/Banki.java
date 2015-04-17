@@ -42,7 +42,6 @@ public class Banki {
     public static KIR getKirInstance() {
         return kirInstance;
     }
-    
 
     public static void sendElixir() {
         for (Bank bank : banki.values()) {

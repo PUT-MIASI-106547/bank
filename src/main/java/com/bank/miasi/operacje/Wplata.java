@@ -21,9 +21,14 @@ public class Wplata implements TypOperacji {
     public TypOperacji getReverse() {
         return this;
     }
-        @Override
+
+    @Override
     public boolean isZewnetrzny() {
         return false;
     }
 
+    @Override
+    public boolean isSecure() {
+        return true;
+    }
 }
