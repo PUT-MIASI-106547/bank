@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bank.miasi.operacje;
 
 import java.math.BigDecimal;
@@ -26,4 +21,9 @@ public class Wplata implements TypOperacji {
     public TypOperacji getReverse() {
         return this;
     }
+        @Override
+    public boolean isZewnetrzny() {
+        return false;
+    }
+
 }

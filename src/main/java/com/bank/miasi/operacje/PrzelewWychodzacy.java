@@ -21,4 +21,10 @@ public class PrzelewWychodzacy implements TypOperacji {
     public TypOperacji getReverse() {
         return new PrzelewPrzychodzacy();
     }
+
+    @Override
+    public boolean isZewnetrzny() {
+        return true;
+    }
+
 }

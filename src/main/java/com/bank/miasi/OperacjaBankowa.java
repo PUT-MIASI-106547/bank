@@ -28,15 +28,24 @@ public class OperacjaBankowa {
     public static void wykonajOperacje(BigDecimal kwota,
             TypOperacji typOperacji, String tytul, Kontable doKogo, Kontable odKogo) throws NiewspieranaOperacja {
         OperacjaBankowa operacjaBankowa = new OperacjaBankowa(typOperacji, kwota, tytul, odKogo, doKogo, new Date());
-        if (doKogo != null) {
-            doKogo.wplata(operacjaBankowa.reverse());
-        }
-        if (odKogo != null) {
-            odKogo.wplata(operacjaBankowa);
-        }
         if (doKogo != null && odKogo != null) {
             if (odKogo.getBank().getBankId() != doKogo.getBank().getBankId()) {
-                odKogo.getBank().dodajPaczkeDoWyslania(doKogo.getBank(), Przesylka.getPrzesylkaFromOperacje(operacjaBankowa));
+                if (!typOperacji.isZewnetrzny()) {
+                    throw new NiewspieranaOperacja();
+                }
+                odKogo.wplata(operacjaBankowa);
+                odKogo.getBank().dodajPaczkeDoWyslania(doKogo.getBank(), Przesylka.getPrzesylkaFromOperacje(operacjaBankowa.reverse()));
+            } else {
+                doKogo.wplata(operacjaBankowa.reverse());
+                odKogo.wplata(operacjaBankowa);
+
+            }
+        } else {
+            if (doKogo != null) {
+                doKogo.wplata(operacjaBankowa.reverse());
+            }
+            if (odKogo != null) {
+                odKogo.wplata(operacjaBankowa);
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.bank.miasi.test;
 
 import com.bank.miasi.kir.*;
-import com.bank.miasi.service.Beans;
+import com.bank.miasi.service.Banki;
 import java.math.BigDecimal;
 import java.util.Random;
 
@@ -13,7 +13,7 @@ public class SymulacjaPaczki {
         int idBankuOdbiorcy = generator.nextInt(10);
         int idBankuNadawcy = generator.nextInt(10);
         BigDecimal kwota = new BigDecimal(generator.nextInt(10000));
-        return new Paczka(Beans.getAliorBank(), Beans.getWBK(), kwota,
+        return new Paczka(Banki.getAliorBank(), Banki.getWBK(), kwota,
                 "test dla id banku odbiorcy: " + idBankuOdbiorcy,
                 "test dla id banku odbiorcy: " + idBankuOdbiorcy
                 + ",id banku nadawcy: " + idBankuNadawcy + ",kwoty: " + kwota,

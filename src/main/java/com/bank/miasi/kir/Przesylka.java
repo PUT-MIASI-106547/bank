@@ -1,45 +1,37 @@
 package com.bank.miasi.kir;
 
 import com.bank.miasi.OperacjaBankowa;
+import com.bank.miasi.konta.Kontable;
 import java.math.BigDecimal;
 
 public class Przesylka {
 
     public static Przesylka getPrzesylkaFromOperacje(OperacjaBankowa operacjaBankowa) {
-            String numerOd = "nadawca nieznany";
-        if (operacjaBankowa.getOdKogo() != null) {
-            numerOd = operacjaBankowa.getOdKogo().getNumer();
-        }
-        String numerDo = operacjaBankowa.getDoKogo().getNumer();
-        return new Przesylka(operacjaBankowa.getKwota(), operacjaBankowa.getTytul(), numerOd, numerDo);
+        return new Przesylka(operacjaBankowa, operacjaBankowa.getOdKogo(), operacjaBankowa.getDoKogo());
     }
 
-    private final BigDecimal kwota;
-    private final String tytul;
-    private final String numerKontaOdbiorcy;
-    private final String numerKontaNadawcy;
+    private OperacjaBankowa operacjaBankowa;
+    private final Kontable nadawca;
+    private final Kontable odbiorca;
 
-    public Przesylka(BigDecimal kwota, String tytul, String numerKontaOdbiorcy, String numerKontaNadawcy) {
-        this.kwota = kwota;
-        this.tytul = tytul;
-        this.numerKontaOdbiorcy = numerKontaOdbiorcy;
-        this.numerKontaNadawcy = numerKontaNadawcy;
+    public Przesylka(OperacjaBankowa operacjaBankowa, Kontable nadawca, Kontable odbiorca) {
+        this.operacjaBankowa = operacjaBankowa;
+        this.odbiorca = odbiorca;
+        this.nadawca = nadawca;
     }
 
-    public BigDecimal getKwota() {
-        return kwota;
+    public OperacjaBankowa rozpakuj() {
+        final OperacjaBankowa toReturn = operacjaBankowa;
+        operacjaBankowa = null;
+        return toReturn;
     }
 
-    public String getTytul() {
-        return tytul;
+    public Kontable getNadawca() {
+        return nadawca;
     }
 
-    public String getNumerKontaOdbiorcy() {
-        return numerKontaOdbiorcy;
-    }
-
-    public String getNumerKontaNadawcy() {
-        return numerKontaNadawcy;
+    public Kontable getOdbiorca() {
+        return odbiorca;
     }
 
 }

@@ -16,7 +16,9 @@ public class SymulatorZewnetrznegoKIR implements KIR {
     Map<UUID, Integer> sesje = new HashMap<>();
 
     public SymulatorZewnetrznegoKIR() {
-        autoryzowaneBanki.put(4, "test");
+        autoryzowaneBanki.put(4, "Alior Bank");
+        autoryzowaneBanki.put(5, "WBK");
+        autoryzowaneBanki.put(6, "KB");
     }
 
     @Override
@@ -43,6 +45,9 @@ public class SymulatorZewnetrznegoKIR implements KIR {
         }
         List<Paczka> lista = listaPaczek.get(idBanku);
         listaPaczek.remove(idBanku);
+        if (lista==null){
+            return new ArrayList<>();
+        }
         return lista;
     }
 

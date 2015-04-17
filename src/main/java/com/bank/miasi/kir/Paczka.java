@@ -1,5 +1,7 @@
 package com.bank.miasi.kir;
 
+import com.bank.miasi.OperacjaBankowa;
+import com.bank.miasi.konta.Kontable;
 import java.math.BigDecimal;
 
 public class Paczka {
@@ -14,11 +16,10 @@ public class Paczka {
         this.przesylka = przesylka;
     }
 
-    public Paczka(Bank bankNadawcy, Bank bankOdbiorcy, BigDecimal kwota, String nazwa,
-            String tytul, String numerKontaOdbiorcy, String numerKontaNadawcy) {
+    public Paczka(Bank bankNadawcy, Bank bankOdbiorcy, OperacjaBankowa operacjaBankowa, Kontable nadawca, Kontable odbiorca) {
         this.bankOdbiorcy = bankOdbiorcy;
         this.bankNadawcy = bankNadawcy;
-        przesylka = new Przesylka(kwota, tytul, numerKontaOdbiorcy, numerKontaNadawcy);
+        przesylka = new Przesylka(operacjaBankowa, nadawca, odbiorca);
     }
 
     public Bank getBankOdbiorcy() {

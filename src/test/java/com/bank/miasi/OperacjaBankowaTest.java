@@ -14,7 +14,7 @@ import com.bank.miasi.konta.typy.KontoWygodne;
 import com.bank.miasi.operacje.PrzelewWychodzacy;
 import com.bank.miasi.operacje.TypOperacji;
 import com.bank.miasi.operacje.Wplata;
-import com.bank.miasi.service.Beans;
+import com.bank.miasi.service.Banki;
 import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -54,8 +54,8 @@ public class OperacjaBankowaTest {
 
         klient1 = new Klient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
         klient2 = new Klient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
-        kontoKlient1 = new KontoBankowe(Beans.getAliorBank(), new KontoWygodne(), "41111", klient1);
-        kontoKlient2 = new KontoBankowe(Beans.getAliorBank(), new KontoWygodne(), "41111", klient2);
+        kontoKlient1 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "41111", klient1);
+        kontoKlient2 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "41111", klient2);
     }
 
     @After

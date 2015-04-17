@@ -9,7 +9,7 @@ import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.OperacjaBankowaTest;
 import com.bank.miasi.konta.typy.KontoWygodne;
-import com.bank.miasi.service.Beans;
+import com.bank.miasi.service.Banki;
 import java.math.BigDecimal;
 import org.easymock.EasyMock;
 import org.easymock.Mock;
@@ -57,7 +57,7 @@ public class KontoBankoweTest {
         OperacjaBankowa operacjaBankowa;
         operacjaBankowa = EasyMock.createNiceMock(OperacjaBankowa.class);
         EasyMock.expect(operacjaBankowa.getKwota()).andReturn(new BigDecimal(10.0));
-        Kontable kontoKlient1 = new KontoBankowe(Beans.getAliorBank(), new KontoWygodne(), "41111", klient1);
+        Kontable kontoKlient1 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "41111", klient1);
         kontoKlient1.wplata(operacjaBankowa);
         assertEquals(kontoKlient1.getStan(), operacjaBankowa.getKwota());
         // TODO review the generated test code and remove the default call to fail.

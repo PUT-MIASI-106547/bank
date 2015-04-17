@@ -12,4 +12,6 @@ public interface TypOperacji {
 
     public BigDecimal getKwota(BigDecimal kwota);
     public TypOperacji getReverse();
+
+    public boolean isZewnetrzny();
 }
