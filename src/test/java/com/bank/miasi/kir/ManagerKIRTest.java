@@ -5,28 +5,33 @@
  */
 package com.bank.miasi.kir;
 
-import com.bank.miasi.OperacjaBankowa;
+import com.bank.miasi.OperacjaBankowaMock;
 import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 import java.lang.reflect.*;
-import com.bank.miasi.kir.Bank;
-import com.bank.miasi.service.Banki;
+
+import com.bank.miasi.operacje.PrzelewWychodzacy;
+import com.bank.miasi.service.DependencyInjection;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import org.easymock.EasyMock;
+import org.powermock.api.easymock.PowerMock;
 
 /**
- *
  * @author Johnny
  */
 public class ManagerKIRTest {
 
-    private SymulatorZewnetrznegoKIR symulator;
     private Bank bank;
     private Bank bankDocelowy;
 
@@ -48,7 +53,6 @@ public class ManagerKIRTest {
         bankDocelowy = new Bank(6, "ttt");
     }
 
-
     @After
     public void tearDown() {
     }
@@ -63,12 +67,6 @@ public class ManagerKIRTest {
 
         bank.pobierzPaczki();
 
-        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
-        field.setAccessible(true);
-
-        List<Paczka> lista = (List<Paczka>) field.get(bank);
-
-        assertEquals(100, lista.size());
     }
 
     /**
@@ -80,12 +78,7 @@ public class ManagerKIRTest {
         bank.pobierzPaczki();
         bank.wyslijPaczki();
 
-        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
-        field.setAccessible(true);
 
-        List<Paczka> lista = (List<Paczka>) field.get(bank);
-
-        assertNull(lista);
     }
 
     /**
@@ -107,7 +100,7 @@ public class ManagerKIRTest {
      */
     @Test
     public void testDodajPaczkeDoWyslaniaTestPrzesylki() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        Przesylka przesylka = new Przesylka(new BigDecimal("1000"), "test", "123", "321");
+       /* Przesylka przesylka = Przesylka.getPrzesylkaFromOperacje(new OperacjaBankowaMock(new PrzelewWychodzacy(), BigDecimal.ZERO, null, null, null, null));
 
         bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);
 
@@ -125,31 +118,23 @@ public class ManagerKIRTest {
 
         Przesylka testowana = (Przesylka) fieldPaczki.get(dodanaPaczka);
 
-        assertEquals(przesylka, testowana);
+        assertEquals(przesylka, testowana);*/
     }
 
     @Test
     public void testDodajPaczkeDoWyslaniaTestIdBankuOdbiorcy() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 
-        Przesylka przesylka = new Przesylka(new BigDecimal("1000"), "test", "123", "321");
-        int idBankuDocelowego = 5;
-
+        Przesylka przesylka = Przesylka.getPrzesylkaFromOperacje(new OperacjaBankowaMock(new PrzelewWychodzacy(), BigDecimal.ZERO, null, null, null, null));
         bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);
+        PowerMock.mockStatic(DependencyInjection.class);
+//        Mock
+        bank.wyslijPaczki();
+    }
 
-        Field field = bank.getClass().getDeclaredField("listaPaczekDoWyslania");
-        field.setAccessible(true);
-
-        List<Paczka> lista = (List<Paczka>) field.get(bank);
-
-        // TODO review the generated test code and remove the default call to fail.
-        int lastIndex = (lista.size() - 1);
-        Paczka dodanaPaczka = lista.get(lastIndex);
-
-        Field fieldPaczki = dodanaPaczka.getClass().getDeclaredField("idBankuOdbiorcy");
-        fieldPaczki.setAccessible(true);
-
-        int idBankuOdbiorcyTest = (int) fieldPaczki.get(dodanaPaczka);
-
-        assertEquals(idBankuDocelowego, idBankuOdbiorcyTest);
+    class KirMock extends SymulatorZewnetrznegoKIR {
+        @Override
+        public void odbierzPaczkiZBanku(List<Paczka> wyslanePaczki, UUID idSesji) {
+            assertEquals(wyslanePaczki.size(), 1);
+        }
     }
 }

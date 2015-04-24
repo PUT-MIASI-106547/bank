@@ -7,15 +7,14 @@ package com.bank.miasi;
 
 import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.kir.Bank;
 import com.bank.miasi.konta.Kontable;
 import com.bank.miasi.konta.KontoBankowe;
 import com.bank.miasi.konta.typy.KontoWygodne;
 import com.bank.miasi.operacje.PrzelewWychodzacy;
 import com.bank.miasi.operacje.TypOperacji;
 import com.bank.miasi.operacje.Wplata;
-import com.bank.miasi.service.Banki;
-import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
+import com.bank.miasi.service.DependencyInjection;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,8 +53,8 @@ public class OperacjaBankowaTest {
 
         klient1 = new Klient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
         klient2 = new Klient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
-        kontoKlient1 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "41111", klient1);
-        kontoKlient2 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "41111", klient2);
+        kontoKlient1 = new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "41111", klient1);
+        kontoKlient2 = new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "41111", klient2);
     }
 
     @After
@@ -75,8 +74,8 @@ public class OperacjaBankowaTest {
         String tytul = "test";
 
         OperacjaBankowa.wykonajOperacje(kwota, typOperacji, tytul, kontoKlient1, kontoKlient2);
-        assertEquals(899.90, kontoKlient1.getStan().doubleValue(), 0);
-        assertEquals(1100.10, kontoKlient2.getStan().doubleValue(), 0);
+        assertEquals(899.90, kontoKlient2.getStan().doubleValue(), 0);
+        assertEquals(1100.10, kontoKlient1.getStan().doubleValue(), 0);
         assertEquals(2, getHistoria(kontoKlient1).size());
         assertEquals(2, getHistoria(kontoKlient2).size());
 

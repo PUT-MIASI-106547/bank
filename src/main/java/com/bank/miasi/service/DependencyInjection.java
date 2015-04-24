@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @author Krzysztof
  */
-public class Banki {
+public class DependencyInjection {
 
     private static Map<String, Bank> banki = new HashMap<>();
     private static final String ALIOR_BANK = "aliorBank";

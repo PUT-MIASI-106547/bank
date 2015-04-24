@@ -24,11 +24,11 @@ public class BankController {
     public static void main(String[] args) {
         Klient krzychu = new Klient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
         Klient jakub = new Klient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
-        Kontable konto1 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "11112", krzychu);
-        Kontable konto2 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "11113", jakub);
-        Kontable konto3 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "11114", jakub);
-        Kontable konto5 = new KontoBankowe(Banki.getWBK(), new KontoWygodne(), "11115", jakub);
-        Kontable konto4 = new KontoBankoweZDebetem(new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "11111", jakub), new BigDecimal(5000));
+        Kontable konto1 = new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "11112", krzychu);
+        Kontable konto2 = new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "11113", jakub);
+        Kontable konto3 = new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "11114", jakub);
+        Kontable konto5 = new KontoBankowe(DependencyInjection.getWBK(), new KontoWygodne(), "11115", jakub);
+        Kontable konto4 = new KontoBankoweZDebetem(new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "11111", jakub), new BigDecimal(5000));
         try {
             OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(12000.10), new Wplata(), "tt", konto1, null);
             przelewyWewnetrzne(konto1, konto2, konto3, konto4);
@@ -67,18 +67,20 @@ public class BankController {
         System.out.println("Elixir");
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(500.00), new PrzelewWychodzacy(), "tt", konto5, konto1);
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(300.00), new PrzelewWychodzacy(), "tt", konto5, konto1);
-        Banki.sendElixir();
+        System.out.println("konto5: " + konto5.getStan());
+        DependencyInjection.sendElixir();
         System.out.println("konto5: " + konto5.getStan());
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(700.00), new PrzelewWychodzacy(), "tt", konto4, konto5);
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(120.00), new PrzelewWychodzacy(), "tt", konto5, konto2);
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(700.00), new PrzelewWychodzacy(), "tt", konto5, konto4);
-        Banki.sendElixir();
+        System.out.println("konto5: " + konto5.getStan());
+        DependencyInjection.sendElixir();
         System.out.println("konto5: " + konto5.getStan());
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(200.00), new PrzelewWychodzacy(), "tt", konto2, konto5);
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(200.00), new PrzelewWychodzacy(), "tt", konto3, konto5);
         OperacjaBankowa.wykonajOperacje(BigDecimal.valueOf(10.00), new PrzelewWychodzacy(), "tt", konto5, konto2);
         System.out.println("konto5: " + konto5.getStan());
-        Banki.sendElixir();
+        DependencyInjection.sendElixir();
         System.out.println("konto5: " + konto5.getStan());
 
     }

@@ -2,8 +2,8 @@ package com.bank.miasi.kir;
 
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.service.Banki;
-import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
+import com.bank.miasi.service.DependencyInjection;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +14,9 @@ public class Bank {
 
     private List<Paczka> listaPaczekDoWyslania = new ArrayList<>();
     private int idBanku;
-    private final String haslo;
+    private String haslo;
+
+    private KIR kirInstance = DependencyInjection.getKirInstance();
 
     public Bank(int idBanku, String haslo) {
         this.idBanku = idBanku;
@@ -22,15 +24,15 @@ public class Bank {
     }
 
     public void pobierzPaczki() {
-        UUID sesja = Banki.getKirInstance().zaloguj(idBanku, haslo);
-        for (Paczka paczka : Banki.getKirInstance().sciagnijPaczkiDoBanku(sesja)) {
+        UUID sesja = kirInstance.zaloguj(idBanku, haslo);
+        for (Paczka paczka : kirInstance.sciagnijPaczkiDoBanku(sesja)) {
             przetworzPaczke(paczka.getPrzesylka());
         }
     }
 
     public void wyslijPaczki() {
-        UUID sesja = Banki.getKirInstance().zaloguj(idBanku, haslo);
-        Banki.getKirInstance().odbierzPaczkiZBanku(listaPaczekDoWyslania, sesja);
+        UUID sesja = kirInstance.zaloguj(idBanku, haslo);
+        kirInstance.odbierzPaczkiZBanku(listaPaczekDoWyslania, sesja);
         listaPaczekDoWyslania = null;
     }
 

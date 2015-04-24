@@ -60,7 +60,7 @@ public class SymulatorZewnetrznegoKIR implements KIR {
             List<Paczka> lista = listaPaczek.get(paczka.getBankOdbiorcy().getBankId());
 
             if (lista == null) {
-                lista = new ArrayList<Paczka>();
+                lista = new ArrayList<>();
                 lista.add(paczka);
                 listaPaczek.put(paczka.getBankOdbiorcy().getBankId(), lista);
             } else {

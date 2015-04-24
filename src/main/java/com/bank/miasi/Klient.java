@@ -88,8 +88,8 @@ public class Klient {
      *
      * @return boolean - true jeżeli haso jest prawidlowe, false jezeli nie jest
      */
-    public boolean checkHaslo(UUID haslo1) {
-        return (this.haslo.equals(haslo));
+    public boolean checkHaslo(UUID haslo) {
+        return this.haslo.equals(haslo);
     }
 
     /**

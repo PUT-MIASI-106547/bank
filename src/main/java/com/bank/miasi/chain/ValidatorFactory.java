@@ -25,7 +25,6 @@ public class ValidatorFactory {
     private static void initValidators() {
         SeryjnyPrzelew seryjnyPrzelew = new SeryjnyPrzelew(null, 4, 10);
         SprawdzKwote sprawdzKwote = new SprawdzKwote(seryjnyPrzelew, BigDecimal.valueOf(10000L));
-        ZglosKwote zglosKwote = new ZglosKwote(sprawdzKwote, BigDecimal.valueOf(5000L));
-        validator = zglosKwote;
+        validator = new ZglosKwote(sprawdzKwote, BigDecimal.valueOf(5000L));
     }
 }

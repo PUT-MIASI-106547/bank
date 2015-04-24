@@ -3,7 +3,6 @@ package com.bank.miasi.konta.typy;
 import java.math.BigDecimal;
 
 /**
- *
  * @author Krzysztof
  */
 public class LokataRoczna implements TypKonta {
@@ -17,5 +16,6 @@ public class LokataRoczna implements TypKonta {
     public int getOkresRozliczeniowy() {
         return 365;
     }
+
 
 }

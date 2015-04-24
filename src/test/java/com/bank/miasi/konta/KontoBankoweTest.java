@@ -7,21 +7,23 @@ package com.bank.miasi.konta;
 
 import com.bank.miasi.Klient;
 import com.bank.miasi.OperacjaBankowa;
-import com.bank.miasi.OperacjaBankowaTest;
+import com.bank.miasi.OperacjaBankowaMock;
 import com.bank.miasi.konta.typy.KontoWygodne;
-import com.bank.miasi.service.Banki;
+import com.bank.miasi.operacje.Wplata;
+import com.bank.miasi.service.DependencyInjection;
+
 import java.math.BigDecimal;
-import org.easymock.EasyMock;
-import org.easymock.Mock;
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Krzysztof
  */
 public class KontoBankoweTest {
@@ -54,10 +56,8 @@ public class KontoBankoweTest {
     @Test
     public void testWplata() throws Exception {
         System.out.println("wplata");
-        OperacjaBankowa operacjaBankowa;
-        operacjaBankowa = EasyMock.createNiceMock(OperacjaBankowa.class);
-        EasyMock.expect(operacjaBankowa.getKwota()).andReturn(new BigDecimal(10.0));
-        Kontable kontoKlient1 = new KontoBankowe(Banki.getAliorBank(), new KontoWygodne(), "41111", klient1);
+        Kontable kontoKlient1 = new KontoBankowe(DependencyInjection.getAliorBank(), new KontoWygodne(), "41111", klient1);
+        OperacjaBankowa operacjaBankowa = new OperacjaBankowaMock(new Wplata(), new BigDecimal(100), "test", kontoKlient1, null, new Date());
         kontoKlient1.wplata(operacjaBankowa);
         assertEquals(kontoKlient1.getStan(), operacjaBankowa.getKwota());
         // TODO review the generated test code and remove the default call to fail.

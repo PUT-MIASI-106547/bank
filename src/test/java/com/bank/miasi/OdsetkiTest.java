@@ -4,23 +4,20 @@ import com.bank.miasi.konta.typy.KontoWygodne;
 import com.bank.miasi.konta.typy.LokataOptymalna;
 import com.bank.miasi.konta.typy.LokataRoczna;
 import com.bank.miasi.konta.typy.TypKonta;
+
 import java.math.BigDecimal;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Johnny
  */
 public class OdsetkiTest {
-
-    private Odsetki odsetki;
-
-    public OdsetkiTest() {
-    }
 
     @BeforeClass
     public static void setUpClass() {
@@ -32,7 +29,7 @@ public class OdsetkiTest {
 
     @Before
     public void setUp() {
-        odsetki = new Odsetki(new OdsetkiStateLokataOptymalna());
+
     }
 
     @After
@@ -46,52 +43,51 @@ public class OdsetkiTest {
     public void testObliczOdsetkiLokataRoczna() {
         System.out.println("obliczOdsetki");
         BigDecimal stanKonta = new BigDecimal(1000);
-        LokataRoczna lokata = new LokataRoczna();
+        TypKonta typ = new LokataRoczna();
 
-        TypKonta typKonta = null;
         BigDecimal expResult = new BigDecimal("20.00");
-        BigDecimal result = odsetki.obliczOdsetki(stanKonta, lokata);
-        assertEquals(expResult, result);
+        BigDecimal result = new Odsetki(typ).obliczOdsetki(stanKonta);
+        assertEquals(expResult.doubleValue(), result.doubleValue(),0.001);
     }
 
     @org.junit.Test
     public void testObliczOdsetkiLokataOptymalna() {
         BigDecimal stanKonta = new BigDecimal("1000");
-        LokataOptymalna lokata = new LokataOptymalna();
+        TypKonta typ = new LokataOptymalna();
 
-        BigDecimal expResult = new BigDecimal("5.94");
-        BigDecimal result = odsetki.obliczOdsetki(stanKonta, lokata);
-        assertEquals(expResult, result);
+        BigDecimal expResult = new BigDecimal("0.594");
+        BigDecimal result = new Odsetki(typ).obliczOdsetki(stanKonta);
+        assertEquals(expResult.doubleValue(), result.doubleValue(),0.001);
     }
 
     @org.junit.Test
     public void testObliczOdsetkiKontoWygodne() {
         BigDecimal stanKonta = new BigDecimal("1000");
-        KontoWygodne konto = new KontoWygodne();
+        TypKonta typ = new KontoWygodne();
 
         BigDecimal expResult = new BigDecimal("0.00");
-        BigDecimal result = odsetki.obliczOdsetki(stanKonta, konto);
-        assertEquals(expResult, result);
+        BigDecimal result = new Odsetki(typ).obliczOdsetki(stanKonta);
+        assertEquals(expResult.doubleValue(), result.doubleValue(),0.001);
     }
 
     @org.junit.Test
     public void testObliczOdsetkiLokataRoczna100000PLN59GR() {
         System.out.println("obliczOdsetki");
         BigDecimal stanKonta = new BigDecimal("100000.59");
-        LokataRoczna lokata = new LokataRoczna();
+        TypKonta typ = new LokataRoczna();
 
         BigDecimal expResult = new BigDecimal("2000.01");
-        BigDecimal result = odsetki.obliczOdsetki(stanKonta, lokata);
-        assertEquals(expResult, result);
+        BigDecimal result = new Odsetki(typ).obliczOdsetki(stanKonta);
+        assertEquals(expResult.doubleValue(), result.doubleValue(),0.001);
     }
 
     @org.junit.Test
     public void testObliczOdsetkiLokataOptymalna100000PLN59GR() {
         BigDecimal stanKonta = new BigDecimal("100000.59");
-        LokataOptymalna lokata = new LokataOptymalna();
+        TypKonta typ = new LokataOptymalna();
 
-        BigDecimal expResult = new BigDecimal("594.52");
-        BigDecimal result = odsetki.obliczOdsetki(stanKonta, lokata);
-        assertEquals(expResult, result);
+        BigDecimal expResult = new BigDecimal("59.452");
+        BigDecimal result = new Odsetki(typ).obliczOdsetki(stanKonta);
+        assertEquals(expResult.doubleValue(), result.doubleValue(),0.001);
     }
 }

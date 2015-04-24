@@ -3,7 +3,6 @@ package com.bank.miasi.konta.typy;
 import java.math.BigDecimal;
 
 /**
- *
  * @author Krzysztof
  */
 public class KontoWygodne implements TypKonta {

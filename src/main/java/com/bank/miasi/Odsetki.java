@@ -1,17 +1,26 @@
 package com.bank.miasi;
 
 import com.bank.miasi.konta.typy.TypKonta;
+
 import java.math.BigDecimal;
 
 public class Odsetki {
 
-    private OdsetkiState state;
+    TypKonta typKonta;
 
-    public Odsetki(OdsetkiState state) {
-        this.state = state;
+    public Odsetki(TypKonta typKonta) {
+        this.typKonta = typKonta;
     }
 
-    public BigDecimal obliczOdsetki(BigDecimal stanKonta, TypKonta typKonta) {
-        return state.obliczOdsetki(stanKonta, typKonta);
+    public BigDecimal obliczOdsetki(BigDecimal stanKonta) {
+        BigDecimal wynik;
+        BigDecimal procent = typKonta.getOprocentowanie();
+
+        wynik = stanKonta;
+        wynik = wynik.multiply(procent);
+        wynik = wynik.multiply(new BigDecimal(typKonta.getOkresRozliczeniowy()));
+        wynik = wynik.divide(new BigDecimal(36500), 4);
+
+        return wynik;
     }
 }
