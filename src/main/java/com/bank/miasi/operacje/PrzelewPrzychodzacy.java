@@ -1,12 +1,16 @@
 package com.bank.miasi.operacje;
 
+import com.google.inject.Inject;
+
 import java.math.BigDecimal;
 
 /**
- *
  * @author Krzysztof
  */
 public class PrzelewPrzychodzacy implements TypOperacji {
+
+    @Inject
+    private PrzelewWychodzacy reverseType;
 
     @Override
     public String getName() {
@@ -19,7 +23,7 @@ public class PrzelewPrzychodzacy implements TypOperacji {
     }
 
     public TypOperacji getReverse() {
-        return new PrzelewWychodzacy();
+        return reverseType;
     }
 
     @Override

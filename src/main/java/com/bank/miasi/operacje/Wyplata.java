@@ -1,39 +1,34 @@
 package com.bank.miasi.operacje;
 
-import com.google.inject.Inject;
-
 import java.math.BigDecimal;
 
 /**
  *
  * @author Krzysztof
  */
-public class PrzelewWychodzacy implements TypOperacji {
-
-    @Inject
-    private PrzelewPrzychodzacy reverseType;
+public class Wyplata implements TypOperacji {
 
     @Override
     public String getName() {
-        return "Przelew wychodzacy";
+        return "Wyplata";
     }
 
     @Override
     public BigDecimal getKwota(BigDecimal kwota) {
-        return kwota.negate();
+        return kwota;
     }
 
     public TypOperacji getReverse() {
-        return reverseType;
+        return this;
     }
 
     @Override
     public boolean isZewnetrzny() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isSecure() {
-        return false;
+        return true;
     }
 }

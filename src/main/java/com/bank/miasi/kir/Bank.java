@@ -2,7 +2,7 @@ package com.bank.miasi.kir;
 
 import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.service.DependencyInjection;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,12 @@ public class Bank {
     private int idBanku;
     private String haslo;
 
-    private KIR kirInstance = DependencyInjection.getKirInstance();
+    private KIR kirInstance;
 
-    public Bank(int idBanku, String haslo) {
+    public Bank(int idBanku, String haslo, KIR kir) {
         this.idBanku = idBanku;
         this.haslo = haslo;
+        kirInstance = kir;
     }
 
     public void pobierzPaczki() {
@@ -32,7 +33,7 @@ public class Bank {
 
     public void wyslijPaczki() {
         UUID sesja = kirInstance.zaloguj(idBanku, haslo);
-        kirInstance.odbierzPaczkiZBanku(listaPaczekDoWyslania, sesja);
+        kirInstance.odbierzPaczkiZBanku(getListaPaczek(), sesja);
         listaPaczekDoWyslania = null;
     }
 
@@ -47,13 +48,18 @@ public class Bank {
     }
 
     public void dodajPaczkeDoWyslania(Bank bankDocelowy, Przesylka przesylka) {
+        this.getListaPaczek().add(new Paczka(this, bankDocelowy, przesylka));
+    }
+
+    private List<Paczka> getListaPaczek() {
         if (null == listaPaczekDoWyslania) {
             listaPaczekDoWyslania = new ArrayList<>();
         }
-        this.listaPaczekDoWyslania.add(new Paczka(this, bankDocelowy, przesylka));
+        return listaPaczekDoWyslania;
     }
 
     public int getBankId() {
         return idBanku;
     }
+
 }

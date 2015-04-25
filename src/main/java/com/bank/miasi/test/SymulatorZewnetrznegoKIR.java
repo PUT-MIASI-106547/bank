@@ -17,8 +17,8 @@ public class SymulatorZewnetrznegoKIR implements KIR {
 
     public SymulatorZewnetrznegoKIR() {
         autoryzowaneBanki.put(4, "Alior Bank");
-        autoryzowaneBanki.put(5, "WBK");
-        autoryzowaneBanki.put(6, "KB");
+        autoryzowaneBanki.put(5, "BANK_WBK");
+        autoryzowaneBanki.put(6, "BANK_KB");
     }
 
     @Override

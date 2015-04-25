@@ -8,12 +8,12 @@ import java.math.BigDecimal;
  */
 public interface TypOperacji {
 
-    public String getName();
+    String getName();
 
-    public BigDecimal getKwota(BigDecimal kwota);
-    public TypOperacji getReverse();
+    BigDecimal getKwota(BigDecimal kwota);
+    TypOperacji getReverse();
 
-    public boolean isZewnetrzny();
+    boolean isZewnetrzny();
 
-    public boolean isSecure();
+    boolean isSecure();
 }

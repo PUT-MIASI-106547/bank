@@ -7,8 +7,8 @@ import java.math.BigDecimal;
  */
 public interface TypKonta {
 
-    public BigDecimal getOprocentowanie();
+    BigDecimal getOprocentowanie();
 
-    public int getOkresRozliczeniowy();
+    int getOkresRozliczeniowy();
 
 }

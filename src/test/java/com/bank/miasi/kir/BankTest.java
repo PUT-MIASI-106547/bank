@@ -6,7 +6,13 @@
 package com.bank.miasi.kir;
 
 import com.bank.miasi.OperacjaBankowaMock;
+import com.bank.miasi.TestInjector;
+import com.bank.miasi.service.Constants;
+import com.bank.miasi.service.providers.AccountTypeProvider;
+import com.bank.miasi.service.providers.OperationTypeProvider;
 import com.bank.miasi.test.SymulatorZewnetrznegoKIR;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,42 +21,35 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.*;
-
 import com.bank.miasi.operacje.PrzelewWychodzacy;
-import com.bank.miasi.service.DependencyInjection;
+import com.bank.miasi.service.providers.BankProvider;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import org.easymock.EasyMock;
 import org.powermock.api.easymock.PowerMock;
 
 /**
  * @author Johnny
  */
-public class ManagerKIRTest {
+public class BankTest {
 
     private Bank bank;
     private Bank bankDocelowy;
 
-    public ManagerKIRTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    BankProvider provider;
+    OperationTypeProvider operationTypeProvider;
+    AccountTypeProvider accountTypeProvider;
 
     @Before
     public void setUp() {
-
-        bank = new Bank(5, "www");
-        bankDocelowy = new Bank(6, "ttt");
+        Injector injector = Guice.createInjector(new TestInjector());
+        provider = injector.getInstance(BankProvider.class);
+        operationTypeProvider = injector.getInstance(OperationTypeProvider.class);
+        accountTypeProvider = injector.getInstance(AccountTypeProvider.class);
+        bank = provider.getInstance(Constants.BANK_ALIOR_BANK);
+        bankDocelowy = provider.getInstance(Constants.BANK_WBK);
     }
 
     @After
@@ -62,8 +61,6 @@ public class ManagerKIRTest {
      */
     @Test
     public void testPobierzPaczki() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-
-        System.out.println("pobierzPaczki");
 
         bank.pobierzPaczki();
 
@@ -100,7 +97,7 @@ public class ManagerKIRTest {
      */
     @Test
     public void testDodajPaczkeDoWyslaniaTestPrzesylki() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-       /* Przesylka przesylka = Przesylka.getPrzesylkaFromOperacje(new OperacjaBankowaMock(new PrzelewWychodzacy(), BigDecimal.ZERO, null, null, null, null));
+       /* Przesylka przesylka = Przesylka.getPrzesylkaFromOperacje(new OperacjaBankowaMock(operationTypeProvider.getInstance(Constants.PRZELEW_WYCHODZACY), BigDecimal.ZERO, null, null, null, null));
 
         bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);
 
@@ -124,17 +121,12 @@ public class ManagerKIRTest {
     @Test
     public void testDodajPaczkeDoWyslaniaTestIdBankuOdbiorcy() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 
-        Przesylka przesylka = Przesylka.getPrzesylkaFromOperacje(new OperacjaBankowaMock(new PrzelewWychodzacy(), BigDecimal.ZERO, null, null, null, null));
+        Przesylka przesylka = Przesylka.getPrzesylkaFromOperacje(new OperacjaBankowaMock(operationTypeProvider.getInstance(Constants.PRZELEW_WYCHODZACY), BigDecimal.ZERO, null, null, null, null));
         bank.dodajPaczkeDoWyslania(bankDocelowy, przesylka);
-        PowerMock.mockStatic(DependencyInjection.class);
+        PowerMock.mockStatic(BankProvider.class);
 //        Mock
         bank.wyslijPaczki();
     }
 
-    class KirMock extends SymulatorZewnetrznegoKIR {
-        @Override
-        public void odbierzPaczkiZBanku(List<Paczka> wyslanePaczki, UUID idSesji) {
-            assertEquals(wyslanePaczki.size(), 1);
-        }
-    }
+
 }

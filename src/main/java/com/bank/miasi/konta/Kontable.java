@@ -16,24 +16,24 @@ import java.util.List;
  */
 public interface Kontable {
 
-    public BigDecimal getStan();
+    BigDecimal getStan();
 
-    public TypKonta getTyp();
+    TypKonta getTyp();
 
-    public List<OperacjaBankowa> getHistoria(Date odKiedy, Date doKiedy);
+    List<OperacjaBankowa> getHistoria(Date odKiedy, Date doKiedy);
 
-    public String getNumer();
+    String getNumer();
 
-    public Klient getWlasciciel();
+    Klient getWlasciciel();
 
-    public void wplata(OperacjaBankowa operacjaBankowa) throws NiewspieranaOperacja;
+    void wplata(OperacjaBankowa operacjaBankowa) throws NiewspieranaOperacja;
 
-    public void addHistoriaOperacji(OperacjaBankowa operacjaBankowa);
+    void addHistoriaOperacji(OperacjaBankowa operacjaBankowa);
 
-    public Bank getBank();
+    Bank getBank();
 
-    public void printRaport(Raport raport);
+    void printRaport(Raport raport);
 
-    public void setInitialAmount(BigDecimal initialAmount);
+    void setInitialAmount(BigDecimal initialAmount);
 
 }
