@@ -7,13 +7,16 @@ import com.bank.miasi.model.konta.Kontable;
 import com.bank.miasi.model.konta.KontoBankowe;
 import com.bank.miasi.model.konta.KontoBankoweZDebetem;
 import com.bank.miasi.model.Klient;
-import com.bank.miasi.services.*;
 import com.bank.miasi.controlers.providers.AccountTypeProvider;
 import com.bank.miasi.controlers.providers.BankProvider;
 import com.bank.miasi.controlers.providers.OperationTypeProvider;
 import com.bank.miasi.reports.AllRaport;
 import com.bank.miasi.reports.ShortRaport;
 import com.bank.miasi.reports.TypeRaport;
+import com.bank.miasi.services.api.Autoryzator;
+import com.bank.miasi.services.api.KlientService;
+import com.bank.miasi.services.api.KontoService;
+import com.bank.miasi.services.api.OperacjaBankowaService;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -53,11 +56,11 @@ public class BankController {
 
         Klient krzychu = klientService.createKlient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00), "qqq");
         Klient jakub = klientService.createKlient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00), "qqq");
-        Kontable konto1 = new KontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11112", krzychu);
-        Kontable konto2 = new KontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11113", jakub);
-        Kontable konto3 = new KontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_OPTYMALSNE), "11114", jakub);
-        Kontable konto5 = new KontoBankowe(bankProvider.getInstance(Constants.BANK_WBK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11115", jakub);
-        Kontable konto4 = new KontoBankoweZDebetem(new KontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11111", jakub), new BigDecimal(5000));
+        Kontable konto1 = kontoService.createKontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11112", krzychu);
+        Kontable konto2 = kontoService.createKontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11113", jakub);
+        Kontable konto3 = kontoService.createKontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_OPTYMALSNE), "11114", jakub);
+        Kontable konto5 = kontoService.createKontoBankowe(bankProvider.getInstance(Constants.BANK_WBK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11115", jakub);
+        Kontable konto4 = kontoService.createKontoBankoweZBebetem(kontoService.createKontoBankowe(bankProvider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "11111", jakub), new BigDecimal(5000));
         try {
             operacjaBankowaService.wykonajOperacje(BigDecimal.valueOf(12000.10), operationTypeProvider.getInstance(Constants.WPLATA), "tt", konto1, null);
             przelewyWewnetrzne(konto1, konto2, konto3, konto4);

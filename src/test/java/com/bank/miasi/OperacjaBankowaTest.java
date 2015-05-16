@@ -8,12 +8,12 @@ package com.bank.miasi;
 import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.model.konta.Kontable;
-import com.bank.miasi.model.konta.KontoBankowe;
 import com.bank.miasi.model.Klient;
 import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.model.operacje.TypOperacji;
-import com.bank.miasi.services.KlientService;
-import com.bank.miasi.services.OperacjaBankowaService;
+import com.bank.miasi.services.api.KlientService;
+import com.bank.miasi.services.api.KontoService;
+import com.bank.miasi.services.api.OperacjaBankowaService;
 import com.bank.miasi.controlers.providers.AccountTypeProvider;
 import com.bank.miasi.controlers.providers.BankProvider;
 import com.bank.miasi.controlers.providers.OperationTypeProvider;
@@ -42,6 +42,7 @@ public class OperacjaBankowaTest {
     OperacjaBankowaService operacjaBankowaService;
 
     BankProvider provider;
+    KontoService kontoService;
     OperationTypeProvider operationTypeProvider;
     AccountTypeProvider accountTypeProvider;
 
@@ -53,11 +54,12 @@ public class OperacjaBankowaTest {
         accountTypeProvider = injector.getInstance(AccountTypeProvider.class);
         KlientService klientService = injector.getInstance(KlientService.class);
         operacjaBankowaService = injector.getInstance(OperacjaBankowaService.class);
+        kontoService = injector.getInstance(KontoService.class);
 
         klient1 = klientService.createKlient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00), "qqq");
         klient2 = klientService.createKlient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00), "qqq");
-        kontoKlient1 = new KontoBankowe(provider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "41111", klient1);
-        kontoKlient2 = new KontoBankowe(provider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "41111", klient2);
+        kontoKlient1 = kontoService.createKontoBankowe(provider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "41111", klient1);
+        kontoKlient2 = kontoService.createKontoBankowe(provider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "41111", klient2);
     }
 
     @After

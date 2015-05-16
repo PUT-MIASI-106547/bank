@@ -1,14 +1,14 @@
-package com.bank.miasi.services;
+package com.bank.miasi.model;
 
 import com.bank.miasi.model.konta.typy.TypKonta;
 
 import java.math.BigDecimal;
 
-public class OdsetkiService {
+public class OdsetkiKalkulator {
 
     TypKonta typKonta;
 
-    public OdsetkiService(TypKonta typKonta) {
+    public OdsetkiKalkulator(TypKonta typKonta) {
         this.typKonta = typKonta;
     }
 

@@ -1,4 +1,4 @@
-package com.bank.miasi.services;
+package com.bank.miasi.services.api;
 
 import com.bank.miasi.model.Klient;
 

@@ -3,7 +3,6 @@ package com.bank.miasi.reports;
 import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.model.konta.Kontable;
 import com.bank.miasi.model.operacje.TypOperacji;
-import javafx.scene.input.DataFormat;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;

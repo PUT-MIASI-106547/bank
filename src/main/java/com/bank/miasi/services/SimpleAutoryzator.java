@@ -1,6 +1,7 @@
 package com.bank.miasi.services;
 
 import com.bank.miasi.model.Klient;
+import com.bank.miasi.services.api.Autoryzator;
 
 public class SimpleAutoryzator implements Autoryzator {
 
