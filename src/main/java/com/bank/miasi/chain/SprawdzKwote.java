@@ -1,6 +1,6 @@
 package com.bank.miasi.chain;
 
-import com.bank.miasi.OperacjaBankowa;
+import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.exceptions.ZbytWysokaOperacjaException;
 import java.math.BigDecimal;

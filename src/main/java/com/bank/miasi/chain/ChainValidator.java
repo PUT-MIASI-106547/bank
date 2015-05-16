@@ -1,6 +1,6 @@
 package com.bank.miasi.chain;
 
-import com.bank.miasi.OperacjaBankowa;
+import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
 
 /**
@@ -22,5 +22,4 @@ public abstract class ChainValidator {
             next.checkValidity(operacja);
         }
     }
-;
 }

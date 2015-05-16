@@ -1,22 +1,16 @@
 package com.bank.miasi.chain;
 
-import com.bank.miasi.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.exceptions.ZbytWysokaOperacjaException;
-import com.bank.miasi.konta.Kontable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import com.bank.miasi.model.OperacjaBankowa;
+import com.bank.miasi.model.konta.Kontable;
+
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
-import javafx.util.Pair;
 
 /**
- *
  * @author Krzysztof
  */
 public class SeryjnyPrzelew extends ChainValidator {
@@ -51,16 +45,9 @@ public class SeryjnyPrzelew extends ChainValidator {
 
     private long countItemsInHistory(Queue<Kontable> historiaKonta, final Kontable doKogo) {
         return historiaKonta.stream().filter(new Predicate<Kontable>() {
-
             @Override
             public boolean test(Kontable t) {
-                if (t == null && doKogo == null) {
-                    return true;
-                }
-                if (null != doKogo && t != null) {
-                    return t.getNumer().equals(doKogo.getNumer());
-                }
-                return false;
+                return t == null && doKogo == null || null != doKogo && t != null && t.getNumer().equals(doKogo.getNumer());
             }
         }).count();
     }

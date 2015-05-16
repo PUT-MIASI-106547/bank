@@ -7,31 +7,28 @@ package com.bank.miasi;
 
 import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.konta.Kontable;
-import com.bank.miasi.konta.KontoBankowe;
-import com.bank.miasi.konta.typy.KontoWygodne;
-import com.bank.miasi.operacje.PrzelewWychodzacy;
-import com.bank.miasi.operacje.TypOperacji;
-import com.bank.miasi.operacje.Wplata;
-import com.bank.miasi.service.Constants;
-import com.bank.miasi.service.providers.AccountTypeProvider;
-import com.bank.miasi.service.providers.BankProvider;
+import com.bank.miasi.model.konta.Kontable;
+import com.bank.miasi.model.konta.KontoBankowe;
+import com.bank.miasi.model.Klient;
+import com.bank.miasi.model.OperacjaBankowa;
+import com.bank.miasi.model.operacje.TypOperacji;
+import com.bank.miasi.services.KlientService;
+import com.bank.miasi.services.OperacjaBankowaService;
+import com.bank.miasi.controlers.providers.AccountTypeProvider;
+import com.bank.miasi.controlers.providers.BankProvider;
+import com.bank.miasi.controlers.providers.OperationTypeProvider;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.bank.miasi.service.providers.OperationTypeProvider;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Krzysztof
@@ -42,6 +39,7 @@ public class OperacjaBankowaTest {
     Klient klient2;
     Kontable kontoKlient1;
     Kontable kontoKlient2;
+    OperacjaBankowaService operacjaBankowaService;
 
     BankProvider provider;
     OperationTypeProvider operationTypeProvider;
@@ -53,9 +51,11 @@ public class OperacjaBankowaTest {
         provider = injector.getInstance(BankProvider.class);
         operationTypeProvider = injector.getInstance(OperationTypeProvider.class);
         accountTypeProvider = injector.getInstance(AccountTypeProvider.class);
+        KlientService klientService = injector.getInstance(KlientService.class);
+        operacjaBankowaService = injector.getInstance(OperacjaBankowaService.class);
 
-        klient1 = new Klient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
-        klient2 = new Klient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00));
+        klient1 = klientService.createKlient("krzychu", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00), "qqq");
+        klient2 = klientService.createKlient("Jakub", "Pawlak", "ccc", "92012812173", "nip", "783874334", BigDecimal.valueOf(4000.00), "qqq");
         kontoKlient1 = new KontoBankowe(provider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "41111", klient1);
         kontoKlient2 = new KontoBankowe(provider.getInstance(Constants.BANK_ALIOR_BANK), accountTypeProvider.getInstance(Constants.KONTO_WYGODNE), "41111", klient2);
     }
@@ -75,7 +75,7 @@ public class OperacjaBankowaTest {
         InicjujWartosc(1000.0, kontoKlient2);
         String tytul = "test";
 
-        OperacjaBankowa.wykonajOperacje(kwota, typOperacji, tytul, kontoKlient1, kontoKlient2);
+        operacjaBankowaService.wykonajOperacje(kwota, typOperacji, tytul, kontoKlient1, kontoKlient2);
         assertEquals(899.90, kontoKlient2.getStan().doubleValue(), 0);
         assertEquals(1100.10, kontoKlient1.getStan().doubleValue(), 0);
         assertEquals(2, getHistoria(kontoKlient1).size());
@@ -103,12 +103,12 @@ public class OperacjaBankowaTest {
         InicjujWartosc(1000.0, kontoKlient2);
         String tytul = "test";
 
-        OperacjaBankowa.wykonajOperacje(kwota, typOperacji, tytul, kontoKlient1, kontoKlient2);
+        operacjaBankowaService.wykonajOperacje(kwota, typOperacji, tytul, kontoKlient1, kontoKlient2);
 
     }
 
     private void InicjujWartosc(double ile, Kontable konto) throws NiewspieranaOperacja {
-        OperacjaBankowa.wykonajOperacje(new BigDecimal(ile), operationTypeProvider.getInstance(Constants.WPLATA), "wplata Poczatkowa", konto, null);
+        operacjaBankowaService.wykonajOperacje(new BigDecimal(ile), operationTypeProvider.getInstance(Constants.WPLATA), "wplata Poczatkowa", konto, null);
     }
 
 }
