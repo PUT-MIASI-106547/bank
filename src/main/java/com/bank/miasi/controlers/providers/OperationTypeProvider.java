@@ -6,13 +6,14 @@ import com.bank.miasi.Constants;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Krzysztof
  */
-public class OperationTypeProvider implements Provider<TypOperacji> {
+public class OperationTypeProvider implements Provider<OperationType> {
 
-    private Map<String, TypOperacji> typy = new HashMap<>();
+    private Map<String, OperationType> typy = new HashMap<>();
 
     public OperationTypeProvider() {
         typy.put(Constants.WPLATA, new Wplata());
@@ -22,11 +23,15 @@ public class OperationTypeProvider implements Provider<TypOperacji> {
 
     }
 
-    public TypOperacji getInstance(String name) {
+    public OperationType getInstance(String name) {
         return typy.get(name);
     }
 
-    public Collection<TypOperacji> getList() {
+    public Collection<OperationType> getList() {
         return typy.values();
+    }
+    @Override
+    public Set getMapSet() {
+        return typy.entrySet();
     }
 }

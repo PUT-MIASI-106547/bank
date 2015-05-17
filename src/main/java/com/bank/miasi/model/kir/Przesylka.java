@@ -5,13 +5,13 @@ import com.bank.miasi.model.konta.Kontable;
 
 public class Przesylka {
 
-    public static Przesylka getPrzesylkaFromOperacje(OperacjaBankowa operacjaBankowa) {
-        return new Przesylka(operacjaBankowa, operacjaBankowa.getOdKogo(), operacjaBankowa.getDoKogo());
-    }
-
     private OperacjaBankowa operacjaBankowa;
     private final Kontable nadawca;
     private final Kontable odbiorca;
+
+    public static Przesylka getPrzesylkaFromOperacje(OperacjaBankowa operacjaBankowa) {
+        return new Przesylka(operacjaBankowa, operacjaBankowa.getOdKogo(), operacjaBankowa.getDoKogo());
+    }
 
     public Przesylka(OperacjaBankowa operacjaBankowa, Kontable nadawca, Kontable odbiorca) {
         this.operacjaBankowa = operacjaBankowa;

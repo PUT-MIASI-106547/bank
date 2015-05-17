@@ -2,7 +2,7 @@ package com.bank.miasi.reports;
 
 import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.model.konta.Kontable;
-import com.bank.miasi.model.operacje.TypOperacji;
+import com.bank.miasi.model.operacje.OperationType;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -10,23 +10,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author inf106547
- */
 public class TypeRaport implements Raport {
 
     private List<Row> rows = new ArrayList<>();
     private Kontable konto;
-    private TypOperacji typOperacji;
+    private OperationType operationType;
 
-    public TypeRaport(TypOperacji typOperacji) {
-        this.typOperacji = typOperacji;
+    public TypeRaport(OperationType operationType) {
+        this.operationType = operationType;
     }
 
     @Override
     public void addRow(OperacjaBankowa operacja) {
         Row row = new Row(operacja);
-        if (operacja.getTypOperacji().getClass().equals(typOperacji.getClass())) {
+        if (operacja.getOperationType().getClass().equals(operationType.getClass())) {
             rows.add(row);
         }
     }
@@ -42,7 +39,7 @@ public class TypeRaport implements Raport {
                 .append("\nWłaściciel:");
         konto.getWlasciciel().printKlientInfo(sb);
         sb.append("\nTyp:")
-                .append(typOperacji.getName())
+                .append(operationType.getName())
                 .append("\n\nPozycje:\n")
                 .append("Data")
                 .append("\t")

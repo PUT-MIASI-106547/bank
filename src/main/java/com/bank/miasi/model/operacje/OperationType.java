@@ -2,16 +2,13 @@ package com.bank.miasi.model.operacje;
 
 import java.math.BigDecimal;
 
-/**
- *
- * @author Krzysztof
- */
-public interface TypOperacji {
+public interface OperationType {
 
     String getName();
 
     BigDecimal getKwota(BigDecimal kwota);
-    TypOperacji getReverse();
+
+    OperationType getReverse();
 
     boolean isZewnetrzny();
 

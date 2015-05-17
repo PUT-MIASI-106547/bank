@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.bank.miasi.OperacjaBankowaTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
-testWykonajOperacje(com.bank.miasi.OperacjaBankowaTest)  Time elapsed: 0 sec  <<< FAILURE!
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.272 sec <<< FAILURE!
+testWykonajOperacje(com.bank.miasi.OperacjaBankowaTest)  Time elapsed: 0.234 sec  <<< FAILURE!
 java.lang.AssertionError: expected:<899.9> but was:<1100.1>
 	at org.junit.Assert.fail(Assert.java:93)
 	at org.junit.Assert.failNotEquals(Assert.java:647)
 	at org.junit.Assert.assertEquals(Assert.java:443)
 	at org.junit.Assert.assertEquals(Assert.java:512)
-	at com.bank.miasi.OperacjaBankowaTest.testWykonajOperacje(OperacjaBankowaTest.java:77)
+	at com.bank.miasi.OperacjaBankowaTest.testWykonajOperacje(OperacjaBankowaTest.java:78)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

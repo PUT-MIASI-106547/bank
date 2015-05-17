@@ -2,11 +2,7 @@ package com.bank.miasi.model.operacje;
 
 import java.math.BigDecimal;
 
-/**
- *
- * @author Krzysztof
- */
-public class PrzelewWychodzacy implements TypOperacji {
+public class PrzelewWychodzacy implements OperationType {
 
     @Override
     public String getName() {
@@ -18,7 +14,7 @@ public class PrzelewWychodzacy implements TypOperacji {
         return kwota.negate();
     }
 
-    public TypOperacji getReverse() {
+    public OperationType getReverse() {
         return new PrzelewPrzychodzacy();
     }
 

@@ -15,7 +15,7 @@ public class ValidatorFactoryImpl implements ValidatorFactory {
 
     private ChainValidator validator;
 
-    public ChainValidator getValidator() {
+    public ChainValidator getFirstValidator() {
         if (validator == null) {
             initValidators();
         }

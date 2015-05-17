@@ -1,18 +1,19 @@
 package com.bank.miasi.controlers.providers;
 
+import com.bank.miasi.Constants;
 import com.bank.miasi.controlers.kir.Bank;
 import com.bank.miasi.controlers.kir.KIR;
-import com.bank.miasi.Constants;
 import com.google.inject.Inject;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Krzysztof
  */
-public class BankProvider implements Provider<Bank>{
+public class BankProvider implements Provider<Bank> {
 
     private static Map<String, Bank> banki = new HashMap<>();
 
@@ -31,6 +32,9 @@ public class BankProvider implements Provider<Bank>{
     public Collection<Bank> getList() {
         return banki.values();
     }
-
+    @Override
+    public Set getMapSet() {
+        return banki.entrySet();
+    }
 
 }

@@ -20,7 +20,7 @@ public class SprawdzKwote extends ChainValidator {
 
     @Override
     public void checkValidity(OperacjaBankowa operacja) throws NiewspieranaOperacja {
-        if (operacja.getKwota().compareTo(limit) > 0 && !operacja.getTypOperacji().isSecure()) {
+        if (operacja.getKwota().compareTo(limit) > 0 && !operacja.getOperationType().isSecure()) {
             throw new ZbytWysokaOperacjaException();
         }
         checkNext(operacja);

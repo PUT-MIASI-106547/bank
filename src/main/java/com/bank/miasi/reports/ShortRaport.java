@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author inf106547
- */
 public class ShortRaport implements Raport {
 
     private List<Row> rows = new ArrayList<>();

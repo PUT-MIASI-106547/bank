@@ -11,9 +11,9 @@ import java.util.Set;
 /**
  * @author Krzysztof
  */
-public class AccountTypeProvider implements Provider<TypKonta> {
+public class AccountTypeProvider implements Provider<AccountType> {
 
-    private Map<String, TypKonta> typy = new HashMap<>();
+    private Map<String, AccountType> typy = new HashMap<>();
 
     public AccountTypeProvider() {
         typy.put(Constants.KONTO_OPTYMALSNE, new KontoOptymalne());
@@ -23,15 +23,15 @@ public class AccountTypeProvider implements Provider<TypKonta> {
 
     }
 
-    public TypKonta getInstance(String name) {
+    public AccountType getInstance(String name) {
         return typy.get(name);
     }
 
-    public Collection<TypKonta> getList() {
+    public Collection<AccountType> getList() {
         return typy.values();
     }
 
-    public Set<Map.Entry<String, TypKonta>> getTypyList() {
+    public Set getMapSet() {
         return typy.entrySet();
     }
 }

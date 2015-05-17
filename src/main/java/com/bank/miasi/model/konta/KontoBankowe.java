@@ -1,21 +1,18 @@
 package com.bank.miasi.model.konta;
 
-import com.bank.miasi.model.Klient;
-import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
-import com.bank.miasi.exceptions.BlednaKwota;
-import com.bank.miasi.model.OperacjaBankowa;
-import com.bank.miasi.model.konta.typy.TypKonta;
-import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.controlers.kir.Bank;
+import com.bank.miasi.exceptions.BlednaKwota;
+import com.bank.miasi.exceptions.NieWystarczajacoSrodkow;
+import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.model.Klient;
+import com.bank.miasi.model.OperacjaBankowa;
+import com.bank.miasi.model.konta.typy.AccountType;
+
 import java.math.BigDecimal;
 
-/**
- *
- * @author Krzysztof
- */
 public class KontoBankowe extends Konto {
 
-    public KontoBankowe(Bank bank, TypKonta typ, String numer, Klient wlasciciel) {
+    public KontoBankowe(Bank bank, AccountType typ, String numer, Klient wlasciciel) {
         super(bank, typ, numer, wlasciciel);
     }
 

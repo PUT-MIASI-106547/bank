@@ -1,7 +1,7 @@
 package com.bank.miasi.controlers.kir;
 
-import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.exceptions.NiewspieranaOperacja;
+import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.model.kir.Paczka;
 import com.bank.miasi.model.kir.Przesylka;
 
@@ -13,38 +13,39 @@ import java.util.logging.Logger;
 
 public class Bank {
 
+    private static final Logger LOG = Logger.getLogger(Bank.class.getName());
     private List<Paczka> listaPaczekDoWyslania = new ArrayList<>();
     private int idBanku;
     private String haslo;
 
-    private KIR kirInstance;
+    private KIR kir;
 
     public Bank(int idBanku, String haslo, KIR kir) {
         this.idBanku = idBanku;
         this.haslo = haslo;
-        kirInstance = kir;
+        this.kir = kir;
     }
 
     public void pobierzPaczki() {
-        UUID sesja = kirInstance.zaloguj(idBanku, haslo);
-        for (Paczka paczka : kirInstance.sciagnijPaczkiDoBanku(sesja)) {
+        UUID sesja = kir.zaloguj(idBanku, haslo);
+        for (Paczka paczka : kir.sciagnijPaczkiDoBanku(sesja)) {
             przetworzPaczke(paczka.getPrzesylka());
         }
     }
 
     public void wyslijPaczki() {
-        UUID sesja = kirInstance.zaloguj(idBanku, haslo);
-        kirInstance.odbierzPaczkiZBanku(getListaPaczek(), sesja);
+        UUID sesja = kir.zaloguj(idBanku, haslo);
+        kir.odbierzPaczkiZBanku(getListaPaczek(), sesja);
         listaPaczekDoWyslania = null;
     }
 
-    public void przetworzPaczke(Przesylka przesylka) {
+    private void przetworzPaczke(Przesylka przesylka) {
         OperacjaBankowa operacja = przesylka.rozpakuj();
         try {
             przesylka.getOdbiorca().wplata(operacja);
         } catch (NiewspieranaOperacja ex) {
             dodajPaczkeDoWyslania(przesylka.getNadawca().getBank(), new Przesylka(operacja, przesylka.getOdbiorca(), przesylka.getNadawca()));
-            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
     }
 

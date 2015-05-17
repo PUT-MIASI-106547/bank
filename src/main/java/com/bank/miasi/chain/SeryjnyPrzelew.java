@@ -33,12 +33,12 @@ public class SeryjnyPrzelew extends ChainValidator {
             historia.put(odKogo, new LinkedList<Kontable>());
         }
         Queue<Kontable> historiaKonta = historia.get(odKogo);
-        if (countItemsInHistory(historiaKonta, doKogo) > historyLimit) {
+        if (countItemsInHistory(historiaKonta, doKogo) >= historyLimit) {
             throw new NiewspieranaOperacja();
         }
         historiaKonta.add(doKogo);
         if (historiaKonta.size() > historySize) {
-            historiaKonta.peek();
+            historiaKonta.poll();
         }
         checkNext(operacja);
     }

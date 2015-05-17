@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: com.bank.miasi.konta.KontoBankoweTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.285 sec <<< FAILURE!
-testWplata(com.bank.miasi.konta.KontoBankoweTest)  Time elapsed: 0.284 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.629 sec <<< FAILURE!
+testWplata(com.bank.miasi.konta.KontoBankoweTest)  Time elapsed: 0.594 sec  <<< ERROR!
 java.lang.NullPointerException
-	at com.bank.miasi.konta.KontoBankowe.wplata(KontoBankowe.java:24)
-	at com.bank.miasi.konta.KontoBankoweTest.testWplata(KontoBankoweTest.java:60)
+	at com.bank.miasi.konta.KontoBankowe.wplata(KontoBankowe.java:25)
+	at com.bank.miasi.konta.KontoBankoweTest.testWplata(KontoBankoweTest.java:61)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

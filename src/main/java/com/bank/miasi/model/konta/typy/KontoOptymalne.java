@@ -2,10 +2,7 @@ package com.bank.miasi.model.konta.typy;
 
 import java.math.BigDecimal;
 
-/**
- * @author Krzysztof
- */
-public class KontoOptymalne implements TypKonta {
+public class KontoOptymalne implements AccountType {
 
     @Override
     public BigDecimal getOprocentowanie() {

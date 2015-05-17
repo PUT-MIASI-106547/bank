@@ -6,7 +6,7 @@ import com.bank.miasi.model.OperacjaBankowa;
 import com.bank.miasi.model.konta.Kontable;
 import com.bank.miasi.model.konta.KontoBankowe;
 import com.bank.miasi.model.konta.KontoBankoweZDebetem;
-import com.bank.miasi.model.konta.typy.TypKonta;
+import com.bank.miasi.model.konta.typy.AccountType;
 import com.bank.miasi.reports.Raport;
 import com.bank.miasi.services.api.KontoService;
 import com.bank.miasi.services.api.OperacjaBankowaService;
@@ -30,12 +30,12 @@ public class KontoServiceImpl implements KontoService {
     }
 
     @Override
-    public Kontable createKontoBankowe(Bank bank, TypKonta typ, String numer, Klient wlasciciel) {
+    public Kontable createKontoBankowe(Bank bank, AccountType typ, String numer, Klient wlasciciel) {
         return new KontoBankowe(bank, typ, numer, wlasciciel);
     }
 
     @Override
-    public Kontable createKontoBankoweZBebetem(Kontable konto, BigDecimal debet) {
+    public Kontable createKontoBankoweZDebetem(Kontable konto, BigDecimal debet) {
         return new KontoBankoweZDebetem(konto, debet);
     }
 }

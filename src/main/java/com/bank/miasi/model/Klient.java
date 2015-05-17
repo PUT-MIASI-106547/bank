@@ -1,14 +1,13 @@
 package com.bank.miasi.model;
 
-import com.google.inject.Inject;
-
 import java.math.BigDecimal;
 
 public class Klient {
 
-    private final String imie, nazwisko;
+    private String imie;
+    private String nazwisko;
     private String adres, NIP;
-    private final String pesel;
+    private String pesel;
     private String haslo;
     private String nrTelefonu;
     private BigDecimal zarobkiMiesieczne;
@@ -16,7 +15,6 @@ public class Klient {
     /**
      * Utworzenie klienta
      */
-    @Inject
     public Klient(String imie, String nazwisko, String adres, String pesel, String NIP, String nrTelefonu, BigDecimal zarobkiMiesieczne) {
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -75,7 +73,6 @@ public class Klient {
     public void setHaslo(String haslo) {
         this.haslo = haslo;
     }
-
 
 
     @Override

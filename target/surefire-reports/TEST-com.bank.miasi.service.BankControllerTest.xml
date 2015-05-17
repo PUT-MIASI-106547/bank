@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="com.bank.miasi.service.BankControllerTest" time="0.021" errors="0" skipped="0">
+<testsuite tests="1" failures="1" name="com.bank.miasi.service.BankControllerTest" time="0.551" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_31\jre\bin"/>
@@ -62,7 +62,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.bank.miasi.service.BankControllerTest" name="testMain" time="0.006">
+  <testcase classname="com.bank.miasi.service.BankControllerTest" name="testMain" time="0.547">
     <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:93)
 	at com.bank.miasi.service.BankControllerTest.testMain(BankControllerTest.java:49)
@@ -101,37 +101,37 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </failure>
     <system-out>main
-Raport dla konta 1111
+Raport dla konta 11112
 Właściciel:krzychu Pawlak
 
 Pozycje:
 Data			Od Kogo		DoKogo		Kwota
-2015-04-17 10:00:44	Nieznany	krzychu Pawlak	12000.1
-2015-04-17 10:00:44	krzychu Pawlak	Jakub Pawlak	-500.0
-2015-04-17 10:00:44	krzychu Pawlak	Jakub Pawlak	-1200.0
-2015-04-17 10:00:44	krzychu Pawlak	com.bank.miasi.konta.KontoBankoweZDebetem@42d3bd8b	-7000.0
-2015-04-17 10:00:44	krzychu Pawlak	Jakub Pawlak	-2000.0
-2015-04-17 10:00:44	Jakub Pawlak	krzychu Pawlak	10.0
+2015-04-17 23:06:01	Nieznany	krzychu Pawlak	12000.1
+2015-04-17 23:06:01	krzychu Pawlak	Jakub Pawlak	-500.0
+2015-04-17 23:06:01	krzychu Pawlak	Jakub Pawlak	-1200.0
+2015-04-17 23:06:01	krzychu Pawlak	com.bank.miasi.konta.KontoBankoweZDebetem@3a03464	-7000.0
+2015-04-17 23:06:01	krzychu Pawlak	Jakub Pawlak	-2000.0
+2015-04-17 23:06:01	Jakub Pawlak	krzychu Pawlak	10.0
 
-Raport dla konta 1111
+Raport dla konta 11112
 Właściciel:krzychu Pawlak
 
 Pozycje:
 Data			Kwota
-2015-04-17 10:00:44	12000.1
-2015-04-17 10:00:44	-500.0
-2015-04-17 10:00:44	-1200.0
-2015-04-17 10:00:44	-7000.0
-2015-04-17 10:00:44	-2000.0
-2015-04-17 10:00:44	10.0
+2015-04-17 23:06:01	12000.1
+2015-04-17 23:06:01	-500.0
+2015-04-17 23:06:01	-1200.0
+2015-04-17 23:06:01	-7000.0
+2015-04-17 23:06:01	-2000.0
+2015-04-17 23:06:01	10.0
 
-Raport dla konta 1111
+Raport dla konta 11112
 Właściciel:krzychu Pawlak
 Typ:Przelew zewnetrzny
 
 Pozycje:
 Data			Od Kogo		Do Kogo		Kwota
-2015-04-17 10:00:44	Jakub Pawlak	krzychu Pawlak	10.0
+2015-04-17 23:06:01	Jakub Pawlak	krzychu Pawlak	10.0
 
 Stany końcowe:
 konto1: 1310.1
@@ -139,6 +139,13 @@ konto2: 2370.0
 konto3: 10200.0
 konto4: -1880.0
 Razem: 12000.1
+Elixir
+konto5: 0
+konto5: 800.0
+konto5: 100.0
+konto5: 920.0
+konto5: 520.0
+konto5: 530.0
 </system-out>
   </testcase>
 </testsuite>

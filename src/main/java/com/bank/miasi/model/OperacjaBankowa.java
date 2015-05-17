@@ -1,25 +1,22 @@
 package com.bank.miasi.model;
 
 import com.bank.miasi.model.konta.Kontable;
-import com.bank.miasi.model.operacje.TypOperacji;
+import com.bank.miasi.model.operacje.OperationType;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * @author Krzysztof
- */
 public class OperacjaBankowa {
 
-    private TypOperacji typOperacji;
+    private OperationType operationType;
     private BigDecimal kwota;
     private String tytul;
     private Kontable odKogo;
     private Kontable doKogo;
     private Date data;
 
-    public OperacjaBankowa(TypOperacji typOperacji, BigDecimal kwota, String tytul, Kontable odKogo, Kontable doKogo, Date data) {
-        this.typOperacji = typOperacji;
+    public OperacjaBankowa(OperationType operationType, BigDecimal kwota, String tytul, Kontable odKogo, Kontable doKogo, Date data) {
+        this.operationType = operationType;
         this.kwota = kwota;
         this.tytul = tytul;
         this.odKogo = odKogo;
@@ -27,13 +24,12 @@ public class OperacjaBankowa {
         this.data = data;
     }
 
-
-    public TypOperacji getTypOperacji() {
-        return typOperacji;
+    public OperationType getOperationType() {
+        return operationType;
     }
 
     public BigDecimal getKwota() {
-        return typOperacji.getKwota(kwota);
+        return operationType.getKwota(kwota);
     }
 
     public BigDecimal getKwotaValue() {

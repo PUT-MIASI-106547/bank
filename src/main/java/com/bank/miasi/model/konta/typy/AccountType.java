@@ -2,10 +2,7 @@ package com.bank.miasi.model.konta.typy;
 
 import java.math.BigDecimal;
 
-/**
- * @author Krzysztof
- */
-public interface TypKonta {
+public interface AccountType {
 
     BigDecimal getOprocentowanie();
 

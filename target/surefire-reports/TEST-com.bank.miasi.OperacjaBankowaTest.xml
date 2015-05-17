@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="1" name="com.bank.miasi.OperacjaBankowaTest" time="0.034" errors="0" skipped="0">
+<testsuite tests="2" failures="1" name="com.bank.miasi.OperacjaBankowaTest" time="0.269" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_31\jre\bin"/>
@@ -62,13 +62,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.bank.miasi.OperacjaBankowaTest" name="testWykonajOperacje" time="0">
+  <testcase classname="com.bank.miasi.OperacjaBankowaTest" name="testWykonajOperacje" time="0.234">
     <failure message="expected:&lt;899.9&gt; but was:&lt;1100.1&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;899.9&gt; but was:&lt;1100.1&gt;
 	at org.junit.Assert.fail(Assert.java:93)
 	at org.junit.Assert.failNotEquals(Assert.java:647)
 	at org.junit.Assert.assertEquals(Assert.java:443)
 	at org.junit.Assert.assertEquals(Assert.java:512)
-	at com.bank.miasi.OperacjaBankowaTest.testWykonajOperacje(OperacjaBankowaTest.java:77)
+	at com.bank.miasi.OperacjaBankowaTest.testWykonajOperacje(OperacjaBankowaTest.java:78)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -106,5 +106,5 @@
     <system-out>wykonajOperacje
 </system-out>
   </testcase>
-  <testcase classname="com.bank.miasi.OperacjaBankowaTest" name="testWykonajOperacjeBezSrodkow" time="0"/>
+  <testcase classname="com.bank.miasi.OperacjaBankowaTest" name="testWykonajOperacjeBezSrodkow" time="0.002"/>
 </testsuite>

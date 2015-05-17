@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.bank.miasi.service.BankControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.16 sec <<< FAILURE!
-testMain(com.bank.miasi.service.BankControllerTest)  Time elapsed: 0.006 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.552 sec <<< FAILURE!
+testMain(com.bank.miasi.service.BankControllerTest)  Time elapsed: 0.547 sec  <<< FAILURE!
 java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:93)
 	at com.bank.miasi.service.BankControllerTest.testMain(BankControllerTest.java:49)

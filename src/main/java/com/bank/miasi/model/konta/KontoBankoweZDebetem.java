@@ -1,19 +1,15 @@
 package com.bank.miasi.model.konta;
 
+import com.bank.miasi.controlers.kir.Bank;
+import com.bank.miasi.exceptions.NiewspieranaOperacja;
 import com.bank.miasi.model.Klient;
 import com.bank.miasi.model.OperacjaBankowa;
-import com.bank.miasi.model.konta.typy.TypKonta;
-import com.bank.miasi.exceptions.NiewspieranaOperacja;
-import com.bank.miasi.controlers.kir.Bank;
+import com.bank.miasi.model.konta.typy.AccountType;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Krzysztof
- */
 public class KontoBankoweZDebetem implements Kontable {
 
     private BigDecimal debet = BigDecimal.ZERO;
@@ -36,7 +32,7 @@ public class KontoBankoweZDebetem implements Kontable {
     }
 
     @Override
-    public TypKonta getTyp() {
+    public AccountType getTyp() {
         return konto.getTyp();
     }
 

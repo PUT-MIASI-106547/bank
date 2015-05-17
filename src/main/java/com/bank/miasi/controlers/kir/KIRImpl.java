@@ -2,19 +2,16 @@ package com.bank.miasi.controlers.kir;
 
 import com.bank.miasi.exceptions.UnauthorizedException;
 import com.bank.miasi.model.kir.Paczka;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-public class SymulatorKIR implements KIR {
+import java.util.*;
 
-    Map<Integer, List<Paczka>> listaPaczek = new HashMap<>();
-    Map<Integer, String> autoryzowaneBanki = new HashMap<>();
-    Map<UUID, Integer> sesje = new HashMap<>();
+public class KIRImpl implements KIR {
 
-    public SymulatorKIR() {
+    private Map<Integer, List<Paczka>> listaPaczek = new HashMap<>();
+    private Map<Integer, String> autoryzowaneBanki = new HashMap<>();
+    private Map<UUID, Integer> sesje = new HashMap<>();
+
+    public KIRImpl() {
         autoryzowaneBanki.put(4, "Alior Bank");
         autoryzowaneBanki.put(5, "BANK_WBK");
         autoryzowaneBanki.put(6, "BANK_KB");
